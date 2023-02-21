@@ -74,7 +74,8 @@
 </form>
 
 -->
-<form [formGroup]="companyform" (ngSubmit)="SaveCompany()">
+<!-- (ngSubmit)="SaveCompany()" -->
+<form [formGroup]="companyform">
   <div class="form-row">
     <div class="form-group col-md-6" hidden>
       <label for="inputEmail4">id</label>
@@ -87,7 +88,8 @@
         type="vamid"
         class="form-control"
         id="inputPassword4"
-        placeholder="{{ this.editdata.vamid }}"
+        placeholder="VAM ID"
+        value="{{ this.editdata.vamid }}"
       />
     </div>
 
@@ -97,7 +99,9 @@
         type="text"
         class="form-control"
         id="inputAddress"
-        placeholder="{{ this.editdata.resourceName }}"
+        placeholder="Name"
+        [readOnly]="true"
+        value="{{ this.editdata.resourceName }}"
       />
     </div>
 
@@ -107,7 +111,9 @@
         type="text"
         class="form-control"
         id="inputAddress2"
-        placeholder="{{ this.editdata.email }}"
+        placeholder="email"
+        [readOnly]="true"
+        value="{{ this.editdata.email }}"
       />
     </div>
 
@@ -117,6 +123,29 @@
         <option>{{ this.editdata.techTrack }}</option>
       </select>
     </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputAddress">Category</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputAddress"
+      placeholder="Category"
+      value="{{ this.editdata.programsTracker.category }}"
+      [readOnly]="true"
+    />
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Category</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputAddress"
+      placeholder="Category"
+      value="{{ this.editdata.programsTracker.program }}"
+      [readOnly]="true"
+    />
   </div>
 
   <!-- <div class="form-group">
@@ -137,9 +166,10 @@
         name="date"
         class="form-control"
         type="date"
-        placeholder="{{ date.parse(this.editdata.startDate, 'yyyy-MM-dd') }}
-         
+        placeholder="dd-mm-yyyy
+        
       "
+        value="{{ this.editdata.startDate | date : 'yyyy-MM-dd' }}"
       />
     </div>
 
@@ -151,6 +181,7 @@
         class="form-control"
         type="date"
         placeholder="MM/DD/YYY"
+        value="{{ this.editdata.endDate | date : 'yyyy-MM-dd' }}"
       />
     </div>
   </div>
@@ -165,21 +196,22 @@
       </select>
     </div>
 
-    <div class="form-group col-md-6">
+    <!-- <div class="form-group col-md-6">
       <label for="inputAddress">Program Status</label>
       <input
         type="text"
         class="form-control"
         id="inputAddress"
-        placeholder="{{ this.editdata.programStatus }}"
+        placeholder="Status"
+        value="{{ this.editdata.programStatus }}"
       />
-    </div>
+    </div> -->
   </div>
   <div class="example-button-row" style="margin: 2px">
-    <a   type="button" class="btn btn-secondary">Save</a> |
+    <a (click)="SaveData()" type="button" class="btn btn-secondary">Save</a>
+    |
     <!-- <button mat-raised-button color="primary">Save</button> | -->
     <!-- <a (click)="closepopup()" mat-raised-button color="accent">Close</a> -->
-    <a (click)="closepopup()"  type="button" class="btn btn-secondary">Close</a>
+    <a (click)="closepopup()" type="button" class="btn btn-secondary">Close</a>
   </div>
 </form>
-

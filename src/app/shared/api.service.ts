@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { companymodel } from '../Model/companymodel';
 import { techtracks } from '../Model/techtracks';
 import { userInfo } from '../Model/userInfomodel';
+import { User } from '../Model/User';
 
 @Injectable({
   providedIn: 'root',
@@ -56,5 +57,11 @@ export class ApiService {
     return this.http.get<[]>(
       'https://localhost:7260/api/VAMHoliday?startDate=' + startDate
     );
+  }
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('https://localhost:7260/api/Employees');
+  }
+  CreateUser(userModel: any) {
+    return this.http.post('https://localhost:7260/api/Employees', userModel);
   }
 }

@@ -1,26 +1,30 @@
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../shared/api.service';
-import * as alertify from 'alertifyjs'
+import * as alertify from 'alertifyjs';
 import { SubmitService } from '../submit.service';
 
 @Component({
   selector: 'app-popup2',
   templateUrl: './popup2.component.html',
-  styleUrls: ['./popup2.component.css']
+  styleUrls: ['./popup2.component.css'],
 })
 export class Popup2Component implements OnInit {
   editdata: any;
-  public listitems : Array<string> =[];
+  public listitems: Array<string> = [];
 
-  constructor(private builder: FormBuilder, private dialog: MatDialog, private api: ApiService, private submitSevice: SubmitService,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(
+    private builder: FormBuilder,
+    private dialog: MatDialog,
+    private api: ApiService,
+    private submitSevice: SubmitService,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
 
   ngOnInit(): void {
     if (this.data.id != '' && this.data.id != null) {
-      this.api.GetCompanybycode(this.data.id).subscribe(response => {
+      this.api.GetCompanybycode(this.data.id).subscribe((response) => {
         this.editdata = response;
       });
     }
@@ -31,7 +35,7 @@ export class Popup2Component implements OnInit {
     vamid: this.builder.control('', Validators.required),
     name: this.builder.control('', Validators.required),
     email: this.builder.control('', Validators.required),
-    
+
     programName: this.builder.control('', Validators.required),
     startDate: this.builder.control('', Validators.required),
     endDate: this.builder.control('', Validators.required),
@@ -44,14 +48,16 @@ export class Popup2Component implements OnInit {
     if (this.companyform.valid) {
       const Editid = this.companyform.getRawValue().id;
       if (Editid != '' && Editid != null) {
-        this.api.UpdateComapny(Editid, this.companyform.getRawValue()).subscribe(response => {
-          this.closepopup();
-          alertify.success("Updated successfully.")
-        });
+        this.api
+          .UpdateComapny(Editid, this.companyform.getRawValue())
+          .subscribe((response) => {
+            this.closepopup();
+            alertify.success('Updated successfully.');
+          });
       } else {
-        this.api.CreateComapny(this.companyform.value).subscribe(response => {
+        this.api.CreateComapny(this.companyform.value).subscribe((response) => {
           this.closepopup();
-          alertify.success("saved successfully.")
+          alertify.success('saved successfully.');
         });
       }
     }
@@ -61,26 +67,25 @@ export class Popup2Component implements OnInit {
     this.dialog.closeAll();
   }
 
-  dropdown(){
-    this.api.getProgramDropDown().subscribe((data: any[])=>{
-      data.forEach(element => {
-        this.listitems.push(element["techtrack"]);
-        
+  dropdown() {
+    this.api.getProgramDropDown().subscribe((data: any[]) => {
+      data.forEach((element) => {
+        this.listitems.push(element['techtrack']);
       });
-    })
+    });
   }
-  filename: string='';
-  filename1: string='';
+  filename: string = '';
+  filename1: string = '';
   handleInput(event: Event) {
     this.filename = (event.target as HTMLInputElement).value;
-    this.filename1 = this.filename.replace(/^.*[\\\/]/, '')
+    this.filename1 = this.filename.replace(/^.*[\\\/]/, '');
+    //document reader && pdf reader
+
+    //map to model and save http post call and store to db
   }
-  submit(){
-    this.submitSevice.isSubmitted=true;
+  submit() {
+    this.submitSevice.isSubmitted = true;
     //console.log('submitted');
     this.dialog.closeAll();
   }
-  
-
-
 }

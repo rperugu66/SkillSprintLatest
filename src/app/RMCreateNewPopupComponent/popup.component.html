@@ -39,6 +39,7 @@
         formControlName="resourceName"
         name="resourceName"
         required
+        [readOnly]="true"
       />
     </div>
 
@@ -53,6 +54,7 @@
         value="{{ userdetails.email }}"
         name="email"
         required
+        [readOnly]="true"
       />
     </div>
     <div class="form-group col-md-6">
@@ -137,6 +139,7 @@
         formControlName="endDate"
         name="endDate"
         value="{{ enddatedetails | date : 'yyyy-MM-dd' }}"
+        [readOnly]="true"
       />
     </div>
     <!-- <div class="form-group col-md-6">
@@ -163,8 +166,8 @@
         #ngModel
         required
       >
-        <option selected>Sarojini</option>
-        <option>Vasudha</option>
+        <option selected>--Select---</option>
+        <option>Harshitha</option>
         <option>Rupesh</option>
       </select>
     </div>

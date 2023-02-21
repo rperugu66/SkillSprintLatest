@@ -1,46 +1,73 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // import { AddproductComponent } from './addproduct/addproduct.component';
-import { CompanyComponent } from './company/company.component';
-import { EditassignmentComponent } from './editassignment/editassignment.component';
+import { CompanyComponent } from './RMnewAssignmentComponent/company.component';
+import { EditassignmentComponent } from './RMeditAssignmentComponent/editassignment.component';
 import { LoginComponent } from './login/login.component';
-import { ViewAssignmentComponent } from './view-assignment/view-assignment.component';
-import { Company1Component } from './company1/company1.component';
-import { ProgramComponent } from './program/program.component';
-
-
+import { ViewAssignmentComponent } from './RMviewAssignmentComponent/view-assignment.component';
+import { Company1Component } from './AssociateComponent/company1.component';
+import { ProgramComponent } from './SMEComponent/program.component';
+import { AuthGuardService } from './shared/auth-guard.service';
+import { registerLocaleData } from '@angular/common';
+import { RegistrationComponent } from './registration/registration.component';
 const routes: Routes = [
-  
   {
-    component:LoginComponent,path:"login",pathMatch:'full'
+    component: LoginComponent,
+    path: 'login',
+    pathMatch: 'full',
   },
   {
-    component:CompanyComponent,path:"company",pathMatch:'full'
+    component: RegistrationComponent,
+    path: 'Registration',
+    pathMatch: 'full',
+  },
+
+  {
+    component: CompanyComponent,
+    path: 'company',
+
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:EditassignmentComponent,path:"editassignment",pathMatch:'full'
+    component: EditassignmentComponent,
+    path: 'editassignment',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:EditassignmentComponent,path:"editassignment/:id",pathMatch:'full'
+    component: EditassignmentComponent,
+    path: 'editassignment/:id',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:ViewAssignmentComponent,path:"viewassignment",pathMatch:'full'
+    component: ViewAssignmentComponent,
+    path: 'viewassignment',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:Company1Component,path:"resource",pathMatch:'full'
+    component: Company1Component,
+    path: 'resource',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:ProgramComponent,path:"SME",pathMatch:'full'
+    component: ProgramComponent,
+    path: 'SME',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
   },
   {
-    component:LoginComponent,path:"",pathMatch:'full'
-  }
-  
- 
+    component: LoginComponent,
+    path: '',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

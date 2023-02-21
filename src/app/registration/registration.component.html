@@ -1,0 +1,116 @@
+<div class="container">
+  <form #myForm="ngForm" *ngIf="!submitted" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="registerForm">
+        <div class="form-group">
+          <label for="">Vam ID:</label>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="VAM ID"
+            name="Phone"
+            [(ngModel)]="userModel.vamId"
+            required
+            #Number="ngModel"
+            [class.is-invalid]="Number.invalid && Number.touched"
+          />
+          <span
+            [class.d-none]="Number.valid || Number.untouched"
+            class="text-danger"
+            >Vam ID Required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            name="Name"
+            [(ngModel)]="userModel.name"
+            required
+            #FirstName="ngModel"
+            [class.is-invalid]="FirstName.invalid && FirstName.touched"
+          />
+          <span
+            [class.d-none]="FirstName.valid || FirstName.untouched"
+            class="text-danger"
+            >Required</span
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="email"
+            name="Email"
+            [(ngModel)]="userModel.email"
+            required
+            #Email="ngModel"
+            [class.is-invalid]="Email.invalid && Email.touched"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          />
+          <span
+            [class.d-none]="Email.valid || Email.untouched"
+            class="text-danger"
+            >Please enter valid email</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Password"
+            name="Password"
+            #Password="ngModel"
+            [(ngModel)]="userModel.password"
+            required
+          />
+          <span
+            [class.d-none]="Password.valid || Password.untouched"
+            class="text-danger"
+            >Password Required</span
+          >
+        </div>
+        <div class="form-group">
+          <label for="role">Choose Option:</label>
+          <select
+            class="form-control"
+            id="role"
+            name="role"
+            #role="ngModel"
+            [(ngModel)]="userModel.role"
+            required
+          >
+            <option value="">Select</option>
+            <option value="SME">SME</option>
+            <option value="Resource Manager">Resource Manager</option>
+            <option value="Associate">Associate</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          (click)="onUserSubmit()"
+          class="btn btn-primary mt-3"
+          [disabled]="myForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+      <!-- <div class="col-12 col-md-6 order-1 order-md-2">
+        <img
+          src="https://d1tgh8fmlzexmh.cloudfront.net/ccbp-responsive-website/thanking-customers-section-img.png"
+          alt="User Registraiton"
+          class="w-50"
+        />
+      </div> -->
+    </div>
+  </form>
+  <div class="text-primary text-center mt-5 text-bold" *ngIf="submitted">
+    Data Submitted Successfully <br />
+    Reload the Page
+  </div>
+</div>
