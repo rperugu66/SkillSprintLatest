@@ -39,6 +39,7 @@ import { Company1Component } from './AssociateComponent/company1.component';
 import { Popup2Component } from './AssociateUploadFileComponent/popup2.component';
 import { DatePipe } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
+import { AssociateProgramCodeComponent } from './associate-program-code/associate-program-code.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,8 @@ import { RegistrationComponent } from './registration/registration.component';
     Company1Component,
     Popup2Component,
     RegistrationComponent,
+  
+    AssociateProgramCodeComponent,
   ],
   imports: [
     BrowserModule,

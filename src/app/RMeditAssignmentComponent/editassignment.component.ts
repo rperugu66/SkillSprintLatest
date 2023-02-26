@@ -68,7 +68,7 @@ export class EditassignmentComponent implements OnInit {
     this.value = localStorage.getItem('id');
     //this.id=parseInt(this.value);
     //this.router.getCurrentNavigation().extras.state.example
-    this.api.GetCompanybycode(this.value).subscribe((response) => {
+    this.api.GetUserData(this.value).subscribe((response) => {
       this.companydata = response;
       this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
       this.finaldata.paginator = this._paginator;

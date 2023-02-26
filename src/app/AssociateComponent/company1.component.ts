@@ -9,6 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { SubmitService } from '../submit.service';
+import { Router } from '@angular/router';
+import { AssociateProgramCodeComponent } from '../associate-program-code/associate-program-code.component';
 
 @Component({
   selector: 'app-company1',
@@ -19,12 +21,18 @@ export class Company1Component implements OnInit {
   faHome = faHome;
   isSubmitted: boolean = false;
   companyform: any;
+  // finaldataUpdated: MatTableDataSource<companymodel>;
+  // varLoginUser: any;
+  currentLogInVamId:any;
 
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
-    public submitService: SubmitService
-  ) {}
+    public submitService: SubmitService,
+    private router: Router
+  ) {
+    this.currentLogInVamId = this.router.getCurrentNavigation()?.extras.state;
+  }
   @ViewChild(MatPaginator) _paginator!: MatPaginator;
   @ViewChild(MatSort) _sort!: MatSort;
   companydata!: companymodel[];
@@ -36,9 +44,9 @@ export class Company1Component implements OnInit {
 
   displayColums: string[] = [
     'id',
-    'HistoryId',
+    // 'HistoryId',
     'techTrack',
-    'Category',
+    // 'Category',
     'program',
     'startDate',
     'endDate',
@@ -46,6 +54,8 @@ export class Company1Component implements OnInit {
     'sme',
     'smeStatus',
     'upload',
+    'comments',
+    // 'SMEComments',
   ];
   SaveCompany() {
     this.isSubmitted = true;
@@ -84,9 +94,15 @@ export class Company1Component implements OnInit {
   }
 
   LoadCompany() {
-    this.api.Getallcomapny().subscribe((response) => {
+    this.api.GetAllHistoryRecordsById(this.currentLogInVamId.userid).subscribe((response) => {
       this.companydata = response;
-      this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
+      //this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
+      // this.finaldata.paginator = this._paginator;
+      // this.finaldata.sort = this._sort;
+      var finaldata = this.companydata.filter(
+        (item: any) => item.vamid === this.currentLogInVamId.vamid
+      );
+      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
       this.finaldata.paginator = this._paginator;
       this.finaldata.sort = this._sort;
     });

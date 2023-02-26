@@ -1,95 +1,18 @@
-<!-- 
-  <form [formGroup]="companyform" (ngSubmit)="SaveCompany()">
-    <div class="form-row">
-      <div class="form-group col-md-6" hidden>
-        <label for="inputEmail4"></label>
-        <input type="id" class="form-control" id="inputEmail4" placeholder="id" >
-      </div>
 
-      <div class="form-group col-md-6">
-        <label for="inputPassword4">VAM ID</label>
-        <input type="vamid" class="form-control" id="inputPassword4" placeholder="vamid" [readOnly]="true">
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="inputAddress">Name</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="{{this.editdata.resourc}}" [readOnly]="true">
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="inputAddress2">Email</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="email" [readOnly]="true">
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="inputState">TechnologyTrack</label>
-        <select id="inputState" class="form-control">
-          <option >JAVA</option>
-          <option>.NET</option>
-        </select>
-      </div>
-    </div>
-
-
-    <div class="form-group">
-      <label for="inputAddress">Category</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Category" >
-    </div>
-
-    <div class="form-group">
-      <label for="inputAddress2">Program Name</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="ProgramName" >
-    </div> 
-
-  
-
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity" >Start Date</label>
-        <input id="date" name="date" class="form-control" type="date" placeholder="MM/DD/YYY"  >
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="inputState">End Date</label>
-        <input  id="date" name="date"  class="form-control" type="date" placeholder="MM/DD/YYY" >
-        
-      </div>
-      
-      </div>
-      <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputState">SME Name</label>
-        <select id="inputState" class="form-control">
-          <option selected>Sarojini</option>
-          <option>Vasudha</option>
-          <option>Rupesh</option>
-        </select>
-      </div>
-
-  </div>
-  <div class="example-button-row" style="margin: 2px">
-    <button mat-raised-button color="primary">Save &nbsp;&nbsp;&nbsp;</button> |
-    <a (click)="closepopup()" mat-raised-button color="accent">Close</a>
-  </div>
-</form>
-
--->
-<!-- (ngSubmit)="SaveCompany()" -->
-<form [formGroup]="companyform">
+<form [formGroup]="editdata">
   <div class="form-row">
     <div class="form-group col-md-6" hidden>
       <label for="inputEmail4">id</label>
-      <input type="id" class="form-control" id="inputEmail4" placeholder="id" />
+      <input type="text" formControlName="id" class="form-control" />
     </div>
 
     <div class="form-group col-md-6">
       <label for="inputPassword4">VAM ID</label>
       <input
-        type="vamid"
+        type="text"
         class="form-control"
-        id="inputPassword4"
         placeholder="VAM ID"
-        value="{{ this.editdata.vamid }}"
+        formControlName="vamid"
       />
     </div>
 
@@ -98,10 +21,9 @@
       <input
         type="text"
         class="form-control"
-        id="inputAddress"
+        formControlName="resourceName"
         placeholder="Name"
         [readOnly]="true"
-        value="{{ this.editdata.resourceName }}"
       />
     </div>
 
@@ -110,17 +32,23 @@
       <input
         type="text"
         class="form-control"
-        id="inputAddress2"
         placeholder="email"
         [readOnly]="true"
-        value="{{ this.editdata.email }}"
+        formControlName="email"
       />
     </div>
 
     <div class="form-group col-md-6">
       <label for="inputState">TechTrack</label>
-      <select id="inputState" class="form-control">
-        <option>{{ this.editdata.techTrack }}</option>
+      <select
+        class="custom-select mb-3"
+        
+        formControlName="techTrack"
+      >
+        <option value="">Choose TechTrack</option>
+        <option *ngFor="let teckTrack of tecktracks" [ngValue]="teckTrack">
+          {{ teckTrack }}
+        </option>
       </select>
     </div>
   </div>
@@ -130,33 +58,21 @@
     <input
       type="text"
       class="form-control"
-      id="inputAddress"
       placeholder="Category"
-      value="{{ this.editdata.programsTracker.category }}"
+      formControlName="category"
       [readOnly]="true"
     />
   </div>
   <div class="form-group">
-    <label for="inputAddress">Category</label>
+    <label for="inputAddress">Program Name</label>
     <input
       type="text"
       class="form-control"
-      id="inputAddress"
-      placeholder="Category"
-      value="{{ this.editdata.programsTracker.program }}"
+      formControlName="program"
+      placeholder="ProgramName"
       [readOnly]="true"
     />
   </div>
-
-  <!-- <div class="form-group">
-      <label for="inputAddress">Category</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Category">
-    </div>
-
-    <div class="form-group">
-      <label for="inputAddress2">Program Name</label>
-      <input type="text" class="form-control" id="inputAddress2" placeholder="Program Name">
-    </div> -->
 
   <div class="form-row">
     <div class="form-group col-md-6">
@@ -166,34 +82,32 @@
         name="date"
         class="form-control"
         type="date"
-        placeholder="dd-mm-yyyy
-        
-      "
-        value="{{ this.editdata.startDate | date : 'yyyy-MM-dd' }}"
+        placeholder="dd-mm-yyyy"
+        formControlName="startDate"
       />
     </div>
+    <!--  value="{{ this.editdata.startDate | date : 'yyyy-MM-dd' }}" -->
 
     <div class="form-group col-md-6">
       <label for="inputState">End Date</label>
       <input
-        id="date"
-        name="date"
         class="form-control"
         type="date"
         placeholder="MM/DD/YYY"
-        value="{{ this.editdata.endDate | date : 'yyyy-MM-dd' }}"
+        formControlName="endDate"
       />
     </div>
+    <!-- value="{{ this.editdata.endDate | date : 'yyyy-MM-dd' }}" -->
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputState">SME</label>
-      <select id="inputState" class="form-control">
-        <!-- <option selected>Sarojini</option>
-        <option>Vasudha</option>
-        <option>Rupesh</option> -->
-        <option>{{ this.editdata.sme }}</option>
-      </select>
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Name"
+        formControlName="sme"
+      />
     </div>
 
     <!-- <div class="form-group col-md-6">

@@ -1,24 +1,23 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../shared/api.service';
 import * as alertify from 'alertifyjs';
 import { DatePipe } from '@angular/common';
-
-//import * as moment from 'moment';
 import { parse } from '@fortawesome/fontawesome-svg-core';
 [DatePipe];
-//[moment];
 @Component({
   selector: 'app-editpopup',
   templateUrl: './editpopup.component.html',
   styleUrls: ['./editpopup.component.css'],
 })
 export class EditpopupComponent implements OnInit {
-  editdata: any;
+  editdata: FormGroup;
   public listitems: Array<string>;
   date: any;
-
+  EditpopupComponent: any;
+  Res: any;
+  tecktracks: any = ['.NET', 'Java'];
   constructor(
     private builder: FormBuilder,
     private dialog: MatDialog,
@@ -27,44 +26,69 @@ export class EditpopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
-  ngOnInit(): void {
+
+  ngOnInit() {
     if (this.data.item.id) {
-      this.api.GetCompanybycode(this.data.id).subscribe((response) => {
-        this.editdata = response;
-      });
-      this.editdata = this.data.item;
-      this.companyform.setValue({
-        id: this.editdata.id,
-        vamid: this.editdata.vamid,
-        resourceName: this.editdata.resourceName,
-        manager: this.editdata.manager,
-        email: this.editdata.email,
-        techTrack: this.editdata.techTrack,
-        startDate: this.editdata.startDate,
-        endDate: this.editdata.endDate,
-        sme: this.editdata.sme,
-        //ProgramStatus: this.editdata.programStatus,
-      });
-      // this.companyform.controls.startDate.setValue(
-      //   this.datepipe.transform(this.editdata.startDate, 'yyyy-MM-dd')
-      // );
+      this.api
+        .GetCompanybycode(this.data.item.historyId)
+        .subscribe((response) => {
+          this.Res = response;
+          if (this.Res != null) {
+            this.editdata = this.builder.group({
+              id: [this.Res.id, Validators.required],
+              historyId: [this.Res.historyId],
+              vamid: [this.Res.vamid, Validators.required],
+              resourceName: [this.Res.resourceName, Validators.required],
+              email: [this.Res.email, Validators.required],
+              manager: [this.Res.manager, Validators.required],
+              techTrack: [this.Res.techTrack, Validators.required],
+              startDate: [
+                this.datepipe.transform(this.Res.startDate, 'yyyy-MM-dd'),
+                Validators.required,
+              ],
+              endDate: [
+                this.datepipe.transform(this.Res.endDate, 'yyyy-MM-dd'),
+                Validators.required,
+              ],
+              sme: [this.Res.sme, Validators.required],
+              category: [this.Res.programsTracker.category],
+              program: [this.Res.programsTracker.program],
+              smeStatus: [this.Res.smeStatus],
+              programStatus: [this.Res.programStatus],
+            });
+          }
+        });
+      // this.editdata = this.builder.group({
+      //   id: [this.Res.id, Validators.required],
+      //   vamid: [this.Res.vamId, Validators.required],
+      //   resourceName: [this.Res.resourceName, Validators.required],
+      //   email: [this.Res.email, Validators.required],
+      //   manager: [this.Res.manager, Validators.required],
+      //   techTrack: [this.Res.techTrack, Validators.required],
+      //   startDate: [this.Res.startDate, Validators.required],
+      //   endDate: [this.Res.endDate, Validators.required],
+      //   sme: [this.Res.sme, Validators.required],
+      // });
     }
-    //console.log(this.editdata.startDate, 'dd-MM-yyyy');
   }
+  // changeTrack(e: any) {
+  //   this.editdata.setValue(e.target.value, {
+  //     onlySelf: true,
+  //   });
+  // }
 
-  companyform = this.builder.group({
-    id: this.builder.control({ value: '', disabled: true }),
-    vamid: this.builder.control('', Validators.required),
-    resourceName: this.builder.control('', Validators.required),
-    email: this.builder.control('', Validators.required),
-    manager: this.builder.control('', Validators.required),
-
-    techTrack: this.builder.control('', Validators.required),
-    startDate: this.builder.control('', Validators.required),
-    endDate: this.builder.control('', Validators.required),
-    sme: this.builder.control('', Validators.required),
-    //ProgramStatus: this.builder.control('', Validators.required),
-  });
+  // companyform = this.builder.group({
+  //   id: this.builder.control({ value: '', disabled: true }),
+  //   vamid: this.builder.control('', Validators.required),
+  //   resourceName: this.builder.control('', Validators.required),
+  //   email: this.builder.control('', Validators.required),
+  //   manager: this.builder.control('', Validators.required),
+  //   techTrack: this.builder.control('', Validators.required),
+  //   startDate: this.builder.control('', Validators.required),
+  //   endDate: this.builder.control('', Validators.required),
+  //   sme: this.builder.control('', Validators.required),
+  //   //ProgramStatus: this.builder.control('', Validators.required),
+  // });
 
   // SaveCompany() {
   //   if (this.companyform.valid) {
@@ -90,11 +114,17 @@ export class EditpopupComponent implements OnInit {
   }
 
   SaveData() {
-    const Editid = this.companyform.getRawValue().id;
+    // this.editdata.startDate = this.companyform.get('date')?.value;
+    const Editid = this.editdata.getRawValue().historyId;
     if (Editid != '' && Editid != null) {
+      var data = JSON.stringify(this.editdata.value);
       this.api
-        .UpdateComapny(Editid, this.companyform.getRawValue())
+        .UpdateComapny(Editid, data)
         .subscribe((response) => {
+          // let x = this.editdata.controls.startDate.getRawValue();
+          // this.companyform.patchValue({ startDate: x });
+          // this.companyform.controls.startDate.setValue(x);
+          // console.log(x);
           this.closepopup();
           alertify.success('Updated successfully.');
         });

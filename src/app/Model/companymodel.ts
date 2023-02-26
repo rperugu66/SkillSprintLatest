@@ -16,4 +16,6 @@ export interface companymodel {
   ProgramStatus: string;
   SMEStatus: string;
   programsTrackerId: number;
+  smecomments: string;
+  programcode: string;
 }

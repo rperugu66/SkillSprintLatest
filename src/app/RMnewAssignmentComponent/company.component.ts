@@ -13,6 +13,7 @@ import { EditpopupComponent } from '../RMeditPopupComponent/editpopup.component'
 import { EditassignmentComponent } from '../RMeditAssignmentComponent/editassignment.component';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',

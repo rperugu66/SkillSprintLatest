@@ -25,12 +25,15 @@ export class ProgramComponent implements OnInit {
   faSearch = faSearch;
   faArrowDown = faArrowDown;
   faDownload = faDownload;
+  currentLogInsme: any;
 
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
     public router: Router
-  ) {}
+  ) {
+     this.currentLogInsme = this.router.getCurrentNavigation()?.extras.state;
+  }
   @ViewChild(MatPaginator) _paginator!: MatPaginator;
   @ViewChild(MatSort) _sort!: MatSort;
   companydata!: companymodel[];
@@ -48,7 +51,7 @@ export class ProgramComponent implements OnInit {
     'startDate',
     'endDate',
     'DelayDays',
-    'Attach',
+    // 'Attach',
     'SMEaction',
   ];
   displayColums1: string[] = [
@@ -77,9 +80,13 @@ export class ProgramComponent implements OnInit {
   LoadCompany() {
     this.api.Getallcomapny().subscribe((response) => {
       this.companydata = response;
-      this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
-      this.finaldata.paginator = this._paginator;
-      this.finaldata.sort = this._sort;
+      var finaldata = this.companydata;
+      var finaldata = this.companydata.filter(
+        (item: any) => item.sme === this.currentLogInsme.name
+      );
+      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
+      // this.finaldata.paginator = this._paginator;
+      // this.finaldata.sort = this._sort;
     });
   }
 
@@ -91,3 +98,5 @@ export class ProgramComponent implements OnInit {
     this.finaldata.filter = filterValue.trim().toLowerCase();
   }
 }
+
+

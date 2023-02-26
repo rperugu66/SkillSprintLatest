@@ -3,6 +3,9 @@ import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faListUl } from '@fortawesome/free-solid-svg-icons';
+// import { FormBuilder, Validators } from '@angular/forms';
+// import { ApiService } from '../shared/api.service';
+// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-header',
@@ -14,7 +17,12 @@ export class HeaderComponent implements OnInit {
   faUser = faUser;
   collapsed = true;
   faListUl = faListUl;
-  constructor() {}
+  // userData: any[];
+  // loginform: any;
+  // varUserName: any;
 
+  constructor() {} // private api: ApiService // private http: HttpClient, // private builder: FormBuilder,
   ngOnInit(): void {}
+
+  signIn() {}
 }

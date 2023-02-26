@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
   userData: any;
+  varUserEmail: any;
+  userRecord: any;
 
   constructor(
     private authService: AuthService,
@@ -36,20 +38,36 @@ export class LoginComponent implements OnInit {
     if (this.loginform.valid) {
       this.api.getUsers().subscribe((data: any[]) => {
         this.userData = data;
-
+        // var vamid = '';
         var varLoginUser = this.userData.filter(
           (item: any) =>
             item.email === this.loginform.value.email &&
             item.password === this.loginform.value.password
         );
-        if (varLoginUser.role === 'Associate') {
-          this.router.navigateByUrl('resource');
+         var varEmail = varLoginUser.map((x: any) => x.role);
+         var varVamId = varLoginUser[0].vamid;
+         var varUserEmail = varLoginUser[0].email;
+        this.api.GetUserByEmail(varUserEmail).subscribe((userRecord: any) => {
+          this.userRecord = userRecord;
+        });
+       
+        if (varEmail == 'Associate') {
+          this.router.navigateByUrl('resource', {
+            state: { vamid: varVamId, userid: this.userRecord.id },
+          });
         }
-        if (varLoginUser.role === 'SME') {
-          this.router.navigateByUrl('SME');
+        var varSME = varLoginUser[0].name;
+        if (varEmail == 'SME') {
+          // this.router.navigateByUrl('SME');
+          this.router.navigateByUrl('SME', {
+            state: { name: varSME },
+          });
+          console.log(varEmail);
         }
-        if (varLoginUser.role === 'Resource Manager') {
+        if (varEmail == 'Resource Manager') {
           this.router.navigateByUrl('company');
+        } else {
+          this.message = 'Your email or password was not valid';
         }
       });
     } else {

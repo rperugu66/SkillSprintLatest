@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { companymodel } from '../Model/companymodel';
@@ -20,7 +20,33 @@ export class ApiService {
     return this.http.get<companymodel[]>(this.apiurl);
   }
 
+  GetAllHistoryRecordsById(id: number): Observable<companymodel[]> {
+    return this.http.get<companymodel[]>(
+      'https://localhost:7260/api/Assign/GetResourceHistoryById' + '/' + id
+    );
+  }
+
+  GetUserByEmail(email: string): Observable<companymodel[]> {
+    return this.http.get<companymodel[]>(
+      'https://localhost:7260/api/Assign/GetResourceByEmail' + '/' + email
+    );
+  }
+
   GetCompanybycode(id: number): Observable<companymodel[]> {
+    return this.http.get<companymodel[]>(
+      'https://localhost:7260/api/Assign/GetResourceHistorySingleById' +
+        '/' +
+        id
+    );
+  }
+
+  GetCompanybyId(id: number): Observable<companymodel[]> {
+    return this.http.get<companymodel[]>(
+      'https://localhost:7260/api/Assign/' + '/' + id
+    );
+  }
+
+  GetUserData(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
       'https://localhost:7260/api/Assign/GetResourceHistoryById' + '/' + id
     );
@@ -39,7 +65,48 @@ export class ApiService {
   }
 
   UpdateComapny(id: any, companydata: any) {
-    return this.http.put(this.apiurl + '/' + id, companydata);
+    let data = companydata;
+
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+
+    return this.http.put(
+      'https://localhost:7260/api/Assign/UpdateResourceHistory' + '/' + id,
+      companydata,
+      { headers: headers }
+    );
+  }
+
+  UpdateProgramCode(id: any, code: any) {
+    let data = code;
+
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+
+    return this.http.put(
+      'https://localhost:7260/api/Assign/UpdateResourceHistoryCode' + '/' + id,
+      code,
+      { headers: headers }
+    );
+  }
+
+  UpdateComments(id: any, comments: any) {
+    let data = comments;
+
+    const headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+
+    return this.http.put(
+      'https://localhost:7260/api/Assign/UpdateResourceHistoryCode' + '/' + id,
+      comments,
+      { headers: headers }
+    );
   }
 
   getProgramDropDown(): Observable<any> {
