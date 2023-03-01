@@ -10,7 +10,7 @@ import { MatSort } from '@angular/material/sort';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import { SubmitService } from '../submit.service';
 import { Router } from '@angular/router';
-import { AssociateProgramCodeComponent } from '../associate-program-code/associate-program-code.component';
+
 
 @Component({
   selector: 'app-company1',
@@ -23,7 +23,7 @@ export class Company1Component implements OnInit {
   companyform: any;
   // finaldataUpdated: MatTableDataSource<companymodel>;
   // varLoginUser: any;
-  currentLogInVamId:any;
+  currentLogInVamId: any;
 
   constructor(
     private dialog: MatDialog,
@@ -44,7 +44,7 @@ export class Company1Component implements OnInit {
 
   displayColums: string[] = [
     'id',
-    // 'HistoryId',
+    // 'historyId',
     'techTrack',
     // 'Category',
     'program',
@@ -79,13 +79,13 @@ export class Company1Component implements OnInit {
   closepopup() {
     throw new Error('Method not implemented.');
   }
-  Openpopup(id: any) {
+  Openpopup(data: any) {
     const _popup = this.dialog.open(Popup2Component, {
       width: '500px',
       exitAnimationDuration: '1000ms',
       enterAnimationDuration: '1000ms',
       data: {
-        id: id,
+        item: data,
       },
     });
     _popup.afterClosed().subscribe((r) => {
@@ -94,22 +94,32 @@ export class Company1Component implements OnInit {
   }
 
   LoadCompany() {
-    this.api.GetAllHistoryRecordsById(this.currentLogInVamId.userid).subscribe((response) => {
-      this.companydata = response;
-      //this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
-      // this.finaldata.paginator = this._paginator;
-      // this.finaldata.sort = this._sort;
-      var finaldata = this.companydata.filter(
-        (item: any) => item.vamid === this.currentLogInVamId.vamid
-      );
-      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
-      this.finaldata.paginator = this._paginator;
-      this.finaldata.sort = this._sort;
-    });
+    this.api
+      .GetAllHistoryRecordsById(this.currentLogInVamId.userid)
+      .subscribe((response) => {
+        this.companydata = response;
+        //this.finaldata = new MatTableDataSource<companymodel>(this.companydata);
+        // this.finaldata.paginator = this._paginator;
+        // this.finaldata.sort = this._sort;
+        var finaldata = this.companydata.filter(
+          (item: any) => item.vamid === this.currentLogInVamId.vamid
+        );
+        this.finaldata = new MatTableDataSource<companymodel>(finaldata);
+        this.finaldata.paginator = this._paginator;
+        this.finaldata.sort = this._sort;
+      });
   }
 
-  EditCompany(id: any) {
-    this.Openpopup(id);
+  getDelayDays(endDate: Date): number {
+    const today = new Date();
+    const end = new Date(endDate);
+    const diffTime = Math.floor(today.getTime() - end.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 0;
+  }
+
+  EditCompany(data: any) {
+    this.Openpopup(data);
   }
   RemoveCompany(id: any) {
     alertify.confirm(

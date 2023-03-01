@@ -1,5 +1,16 @@
 <app-header1 *ngIf="router.url !== '/SME'"></app-header1>
 
+  <h2
+    style="
+      font-size: 24px;
+      font-family: Gill Sans MT-12;
+      padding-left: 535px;
+      color: teal;
+    "
+  >
+    <!-- <b>SME:&nbsp;</b><label style="font-family: Gill Sans MT-12">Rupesh</label> -->
+    <u><b>SME View</b></u>
+  </h2>
 <div class="mark">
   <div>
     <p style="font-size: 18px; font-family: Gill Sans MT-12">
@@ -8,17 +19,6 @@
     </p>
   </div>
 
-  <h2
-    style="
-      font-size: 24px;
-      font-family: Gill Sans MT-12;
-      padding-left: 250px;
-      color: teal;
-    "
-  >
-    <!-- <b>SME:&nbsp;</b><label style="font-family: Gill Sans MT-12">Rupesh</label> -->
-    <u><b>SME View</b></u>
-  </h2>
   <p></p>
   <p style="font-size: 18px; font-family: Gill Sans MT-12">
     <b>Resource Manager:&nbsp;</b
@@ -121,7 +121,7 @@
       >
         <b> Delay Days</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </th>
-      <td mat-cell *matCellDef="let element">{{ element.DelayDays }}</td>
+      <td mat-cell *matCellDef="let element">{{ getDelayDays(element.endDate) }}</td>
     </ng-container>
 
     <ng-container matColumnDef="SMEAction">
@@ -145,16 +145,16 @@
         *matHeaderCellDef
         style="color: white; font-size: 15px; font: Gilson MT-12"
       >
-        <b>Download Document</b>
+        <b>Review Code</b>
       </th>
       <td mat-cell *matCellDef="let element">
         <div>
           <a
             mat-raised-button
-            (click)="EditCompany(element.id)"
+            (click)="EditCompany(element)"
             color="grayscale"
           >
-            <fa-icon [icon]="faDownload"></fa-icon>&nbsp;&nbsp;</a
+            <fa-icon style="height: 20px;" [icon]="faDownload"></fa-icon>&nbsp;&nbsp;</a
           >
         </div>
       </td>
@@ -172,9 +172,9 @@
         <div>
           <a
             type="button"
-            (click)="EditCompany(element.id)"
+            (click)="EditComments(element)"
             class="btn btn-info"
-            style="color: white"
+            style="color: white;font-size: 10px;width: 75px;" 
             >Approval&nbsp;&nbsp;</a
           >
           <!-- <a mat-raised-button (click)="EditCompany(element.id)" color="primary"><b>SME Action</b>&nbsp;&nbsp;</a>  -->
@@ -287,7 +287,7 @@
         <b> Delay Days</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </th>
       <td mat-cell *matCellDef="let element">
-        {{&nbsp;&nbsp;&nbsp;&nbsp;element.Delaydays}}
+        {{ getDelayDays(element.endDate) }}
       </td>
     </ng-container>
 

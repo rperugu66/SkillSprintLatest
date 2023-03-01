@@ -93,7 +93,13 @@ export class ApiService {
       { headers: headers }
     );
   }
-
+  GetProgramCode(id: any) {
+    return this.http.get(
+      'https://localhost:7260/api/Assign/GetResourceHistorySingleById' +
+        '/' +
+        id
+    );
+  }
   UpdateComments(id: any, comments: any) {
     let data = comments;
 

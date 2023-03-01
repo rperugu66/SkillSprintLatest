@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     password: this.builder.control('', Validators.required),
   });
 
+
   ngOnInit(): void {}
 
   signIn() {
@@ -44,13 +45,13 @@ export class LoginComponent implements OnInit {
             item.email === this.loginform.value.email &&
             item.password === this.loginform.value.password
         );
-         var varEmail = varLoginUser.map((x: any) => x.role);
-         var varVamId = varLoginUser[0].vamid;
-         var varUserEmail = varLoginUser[0].email;
+        var varEmail = varLoginUser.map((x: any) => x.role);
+        var varVamId = varLoginUser[0].vamid;
+        var varUserEmail = varLoginUser[0].email;
         this.api.GetUserByEmail(varUserEmail).subscribe((userRecord: any) => {
           this.userRecord = userRecord;
         });
-       
+
         if (varEmail == 'Associate') {
           this.router.navigateByUrl('resource', {
             state: { vamid: varVamId, userid: this.userRecord.id },

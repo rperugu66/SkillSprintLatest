@@ -39,7 +39,9 @@ import { Company1Component } from './AssociateComponent/company1.component';
 import { Popup2Component } from './AssociateUploadFileComponent/popup2.component';
 import { DatePipe } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
-import { AssociateProgramCodeComponent } from './associate-program-code/associate-program-code.component';
+
+import { SmeprogramcodepopupComponent } from './smeprogramcodepopup/smeprogramcodepopup.component';
+
 
 @NgModule({
   declarations: [
@@ -61,8 +63,10 @@ import { AssociateProgramCodeComponent } from './associate-program-code/associat
     Company1Component,
     Popup2Component,
     RegistrationComponent,
-  
-    AssociateProgramCodeComponent,
+
+   
+    SmeprogramcodepopupComponent,
+    CommentpopupComponent
   ],
   imports: [
     BrowserModule,

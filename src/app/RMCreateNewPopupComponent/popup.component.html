@@ -127,6 +127,7 @@
         formControlName="startDate"
         (change)="getEndDate($event)"
         name="startDate"
+        [min]="todayDate"
       />
     </div>
 
@@ -172,11 +173,11 @@
       </select>
     </div>
   </div>
-  <div class="example-button-row" style="margin: 2px">
-    <a type="button" (click)="submit()" class="btn btn-info">Save</a>&nbsp;
-    |&nbsp;
+  <div class="example-button-row" style="margin: 2px;padding-left: 100px;">
+    <a type="button" (click)="submit()" class="btn btn-info" style="font-size: 10px;color:white;width: 75px;" >Save</a>&nbsp;
+    |&nbsp; |&nbsp; |&nbsp; |&nbsp;
     <!-- <button mat-raised-button color="primary" (click)="submit()">Save</button>&nbsp; |&nbsp; -->
     <!-- <a (click)="closepopup()" mat-raised-button color="accent" >Close</a> -->
-    <a (click)="closepopup()" type="button" class="btn btn-secondary">Close</a>
+    <a (click)="closepopup()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" >Close</a>
   </div>
 </form>

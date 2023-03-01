@@ -34,6 +34,7 @@ export class PopupComponent implements OnInit {
   regForm: FormGroup;
   isSubmited: boolean = false;
   resourceName: any;
+  todayDate: Date;
   constructor(
     private builder: FormBuilder,
     private dialog: MatDialog,
@@ -44,6 +45,7 @@ export class PopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.regForm = this.companyform;
+    const todayDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
   }
 
   ngOnInit(): void {

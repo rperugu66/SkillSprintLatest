@@ -2,6 +2,7 @@ export interface companymodel {
   id: number;
   srno: number;
   HistoryId: number;
+  historyId: number;
   vamid: number;
   resourceName: string;
   manager: string;
@@ -13,7 +14,7 @@ export interface companymodel {
   startDate: Date;
   endDate: Date;
   SMEName: string;
-  ProgramStatus: string;
+  programStatus: string;
   SMEStatus: string;
   programsTrackerId: number;
   smecomments: string;

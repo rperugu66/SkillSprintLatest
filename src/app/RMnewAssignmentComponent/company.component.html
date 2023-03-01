@@ -2,11 +2,11 @@
   <h2
     style="font-family: Gill sans MT-12px; font-size: 22px; margin-top: -1.5%"
   >
-    New Assignment
+    
     <u style="color: teal"
       ><b
         style="
-          padding-left: 370px;
+          padding-left: 600px;
 
           color: teal;
         "
@@ -14,6 +14,9 @@
       ></u
     >
   </h2>
+ <h2 style="font-family: Gill sans MT-12px; font-size: 22px; margin-top: -1.5%">
+  New Assignment
+</h2>
 
   <!-- <p style="font-family: Gill sans MT-12px;">Resource Manager - <strong>Vasudha</strong></p> -->
 
@@ -24,7 +27,7 @@
         type="button"
         (click)="Openpopup('')"
         class="btn btn-info"
-        style="margin: 2%"
+        style="margin: 2% ;font-size: 15px;color:white;width: 125px;" 
         >Create New</a
       >
       <!-- <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search> -->
@@ -182,7 +185,7 @@
         </th>
         <td mat-cell *matCellDef="let element">
           <div>
-            <a type="button" (click)="routing(element.id)" class="btn btn-info"
+            <a type="button" (click)="routing(element.id)" class="btn btn-info" style="font-size: 10px;color:white;width: 75px;" 
               >Edit</a
             >
             |
@@ -191,7 +194,7 @@
             <a
               (click)="RemoveCompany(element.id)"
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" 
               >Delete</a
             >
             <!-- <a mat-raised-button (click)="RemoveCompany(element.id)" color="accent">Delete</a> -->

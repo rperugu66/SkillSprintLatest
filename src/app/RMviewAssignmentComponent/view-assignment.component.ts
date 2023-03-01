@@ -79,6 +79,15 @@ export class ViewAssignmentComponent implements OnInit {
       function () {}
     );
   }
+
+  getDelayDays(endDate: Date): number {
+    const today = new Date();
+    const end = new Date(endDate);
+    const diffTime = Math.floor(today.getTime() - end.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 0;
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.finaldata.filter = filterValue.trim().toLowerCase();

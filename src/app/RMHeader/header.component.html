@@ -298,9 +298,10 @@
   <!-- <app-navbar>
 
   </app-navbar> -->
+  <!-- *ngIf="!isResourceOrSmepage()" -->
   &nbsp;&nbsp;&nbsp;
-  <button mat-button [matMenuTriggerFor]="belowMenu">
-    <fa-icon [icon]="faListUl" size="2x"></fa-icon>
+  <button mat-button *ngIf="!isResourceOrSmepage()" [matMenuTriggerFor]="belowMenu">
+    <fa-icon [icon]="faListUl" size="1x" style="font-weight: 900;"></fa-icon>
   </button>
   <mat-menu #belowMenu="matMenu" yPosition="below">
     <button routerLink="company" mat-menu-item>New Assignment</button>
@@ -318,6 +319,10 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <h2 style="font-family: gill sans MT; text-align: center; font-size: 21.1px">
     <b>Code X</b>
   </h2>
@@ -330,13 +335,17 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
   <button
     mat-button
     [matMenuTriggerFor]="menu"
     style="font-size: 14px; font-family: 'Gill Sans MT'; text-align: right"
   >
-    <fa-icon [icon]="faUser" size="2x"></fa-icon><b>Vasudha Masoor (RM)</b>
+    <fa-icon [icon]="faUser" size="2x">
+
+    </fa-icon>
+    <b *ngIf="name" class="user-info" style="font-size: large;padding-top: -80px;">  {{ name }} </b>
   </button>
   <mat-menu #menu="matMenu">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

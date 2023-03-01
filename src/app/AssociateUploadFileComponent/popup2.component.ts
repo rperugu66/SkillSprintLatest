@@ -11,12 +11,16 @@ import { SubmitService } from '../submit.service';
   styleUrls: ['./popup2.component.css'],
 })
 export class Popup2Component implements OnInit {
+[x: string]: any;
   formdata: FormGroup;
   // public listitems: Array<string> = [];
   // programCode: any;
   id: any;
+  historyId: any;
   resp: any;
   code: string = '';
+  editdata: any;
+  datepipe: any;
 
 
   setValue() {
@@ -28,19 +32,56 @@ export class Popup2Component implements OnInit {
     private api: ApiService,
     private submitSevice: SubmitService,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) { }
+
 
   ngOnInit() {
-    
 
-    this.api.GetCompanybycode(this.data.id).subscribe((response) => {
-      this.resp = response;
-      this.formdata = this.builder.group({
-        id: [this.resp.id],
-        programCode: [this.resp.programCode],
-        programStatus: [this.resp.programStatus, Validators.required],
+
+  // if (this.data.item.id) {
+  //  this.api.GetCompanybycode(this.data.item.historyId).subscribe((response) => {
+  //    this.resp = response;
+  //    if (this.resp != null) {
+  //      this.formdata = this.builder.group({
+  //        id: [this.resp.id, Validators.required],
+  //        historyId: [this.resp.historyId],
+  //        vamid: [this.resp.vamid, Validators.required],
+  //        resourceName: [this.resp.resourceName, Validators.required],
+  //        email: [this.resp.email, Validators.required],
+  //        manager: [this.resp.manager, Validators.required],
+  //        techTrack: [this.resp.techTrack, Validators.required],
+  //        startDate: [
+  //          this.datepipe.transform(this.resp.startDate, 'yyyy-MM-dd'),
+  //          Validators.required,
+  //        ],
+  //        endDate: [
+  //          this.datepipe.transform(this.resp.endDate, 'yyyy-MM-dd'),
+  //          Validators.required,
+  //        ],
+  //        sme: [this.resp.sme, Validators.required],
+  //        category: [this.resp.programsTracker.category],
+  //        program: [this.resp.programsTracker.program],
+  //        smeStatus: [this.resp.smeStatus],
+  //        programStatus: [this.resp.programStatus],
+  //        programCode: [this.resp.programCode],
+  //      });
+  //    }
+  //  });
+
+  // }
+
+    this.api
+      .GetCompanybycode(this.data.item.historyId)
+      .subscribe((response) => {
+        this.resp = response;
+        this.formdata = this.builder.group({
+          historyId: [this.resp.historyId],
+          programStatus: [this.resp.programStatus],
+          programCode: [this.resp.programCode]
+
+          // smeStatus: [this.resp.smeStatus, Validators.required],
+        });
       });
-    });
   }
 
   closepopup() {
@@ -48,15 +89,31 @@ export class Popup2Component implements OnInit {
   }
 
   onSubmit() {
-    let data = this.formdata.value;
-    this.api
-      .UpdateProgramCode(this.data.id, this.formdata.value)
-      .subscribe((response) => {
-        this.closepopup();
-        alertify.success('Updated successfully.');
-      });
-  }
-  update(){
-    console.log('formdata', this.formdata.valid);
-  }
-}
+ 
+    let data =  this.formdata.value;
+      this.api
+        .UpdateProgramCode(this.data.item.historyId, data)
+        .subscribe((response) => {
+         
+          console.log(data);
+          this.closepopup();
+          alertify.success('Updated successfully.');
+        });
+    }
+
+    // const Editid = this.editdata.getRawValue().historyId;
+    // if (Editid != '' && Editid != null) {
+    //   var data = JSON.stringify(this.editdata.value);
+    //   this.api
+    //     .UpdateProgramCode(Editid, data)
+    //     .subscribe((response) => {
+          // let x = this.editdata.controls.startDate.getRawValue();
+          // this.companyform.patchValue({ startDate: x });
+          // this.companyform.controls.startDate.setValue(x);
+          // console.log(x);
+        //   this.closepopup();
+        //   alertify.success('Updated successfully.');
+        // });
+    }
+
+  

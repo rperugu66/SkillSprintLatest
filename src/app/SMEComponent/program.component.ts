@@ -14,6 +14,10 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { Popup1Component } from '../SMEPopupComponent/popup1.component';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
+import { Popup2Component } from '../AssociateUploadFileComponent/popup2.component';
+import { SmeprogramcodepopupComponent } from '../smeprogramcodepopup/smeprogramcodepopup.component';
+import { CommentpopupComponent } from '../SMEcommentPopupComponent/commentpopup.component';
+import da from '@mobiscroll/angular/dist/js/i18n/da';
 
 @Component({
   selector: 'app-program',
@@ -26,13 +30,14 @@ export class ProgramComponent implements OnInit {
   faArrowDown = faArrowDown;
   faDownload = faDownload;
   currentLogInsme: any;
+  value: any;
 
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
     public router: Router
   ) {
-     this.currentLogInsme = this.router.getCurrentNavigation()?.extras.state;
+    this.currentLogInsme = this.router.getCurrentNavigation()?.extras.state;
   }
   @ViewChild(MatPaginator) _paginator!: MatPaginator;
   @ViewChild(MatSort) _sort!: MatSort;
@@ -51,7 +56,7 @@ export class ProgramComponent implements OnInit {
     'startDate',
     'endDate',
     'DelayDays',
-    // 'Attach',
+    'Attach',
     'SMEaction',
   ];
   displayColums1: string[] = [
@@ -63,13 +68,27 @@ export class ProgramComponent implements OnInit {
     'Delaydays',
     'smeStatus',
   ];
-  Openpopup(id: any) {
-    const _popup = this.dialog.open(Popup1Component, {
+  Openpopup(data: any) {
+    const _popup = this.dialog.open(SmeprogramcodepopupComponent, {
       width: '500px',
       exitAnimationDuration: '1000ms',
       enterAnimationDuration: '1000ms',
       data: {
-        id: id,
+        item: data,
+      },
+    });
+    _popup.afterClosed().subscribe((r) => {
+      this.LoadCompany();
+    });
+  }
+
+  commentsPopUp(data: any) {
+    const _popup = this.dialog.open(CommentpopupComponent, {
+      width: '500px',
+      exitAnimationDuration: '1000ms',
+      enterAnimationDuration: '1000ms',
+      data: {
+        item: data,
       },
     });
     _popup.afterClosed().subscribe((r) => {
@@ -78,7 +97,8 @@ export class ProgramComponent implements OnInit {
   }
 
   LoadCompany() {
-    this.api.Getallcomapny().subscribe((response) => {
+    this.value = localStorage.getItem('id');
+    this.api.GetUserData(this.value).subscribe((response) => {
       this.companydata = response;
       var finaldata = this.companydata;
       var finaldata = this.companydata.filter(
@@ -90,8 +110,29 @@ export class ProgramComponent implements OnInit {
     });
   }
 
-  EditCompany(id: any) {
-    this.Openpopup(id);
+  routing(historyId: any) {
+    localStorage.setItem('id', historyId);
+    // this.api.GetCompanybycode(id);
+    this.router.navigate(['/smeprogramcodepopup']);
+    this.router.navigate(['/smeprogramcodepopup'], {
+      state: { example: historyId },
+    });
+    //this.api.GetCompanybycode(id);
+  }
+
+  getDelayDays(endDate: Date): number {
+    const today = new Date();
+    const end = new Date(endDate);
+    const diffTime = Math.floor(today.getTime() - end.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays > 0 ? diffDays : 0;
+  }
+
+  EditCompany(data: any) {
+    this.Openpopup(data);
+  }
+  EditComments(data: any) {
+    this.commentsPopUp(data);
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
