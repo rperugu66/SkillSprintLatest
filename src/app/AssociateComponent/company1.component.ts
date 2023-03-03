@@ -24,6 +24,8 @@ export class Company1Component implements OnInit {
   // finaldataUpdated: MatTableDataSource<companymodel>;
   // varLoginUser: any;
   currentLogInVamId: any;
+  name: any;
+  vamid: any;
 
   constructor(
     private dialog: MatDialog,
@@ -40,6 +42,17 @@ export class Company1Component implements OnInit {
 
   ngOnInit(): void {
     this.LoadCompany();
+    this.api.getUsers().subscribe({
+      next: (data: any[]) => {
+        this.name = data[0].name;
+        this.vamid = data[1].vamid;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+      
+    });
+      
   }
 
   displayColums: string[] = [
@@ -81,7 +94,7 @@ export class Company1Component implements OnInit {
   }
   Openpopup(data: any) {
     const _popup = this.dialog.open(Popup2Component, {
-      width: '500px',
+      width: '760px',
       exitAnimationDuration: '1000ms',
       enterAnimationDuration: '1000ms',
       data: {

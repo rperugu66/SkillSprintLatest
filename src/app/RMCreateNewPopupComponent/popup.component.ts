@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../shared/api.service';
@@ -16,6 +16,13 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./popup.component.css'],
 })
 export class PopupComponent implements OnInit {
+  // isOpen = false;
+  // openPopup() {
+  //   this.isOpen = true;
+  // }
+  // closePopup() {
+  //   this.isOpen = false;
+  // }
   editdata: any;
   public listitems: any;
   track: techtracks[];
@@ -35,6 +42,7 @@ export class PopupComponent implements OnInit {
   isSubmited: boolean = false;
   resourceName: any;
   todayDate: Date;
+  minDate: string;
   constructor(
     private builder: FormBuilder,
     private dialog: MatDialog,
@@ -45,8 +53,15 @@ export class PopupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.regForm = this.companyform;
+    const today = new Date();
+    this.minDate = today.toISOString().slice(0, 10);
     const todayDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
   }
+
+  // @Output() onClose = new EventEmitter();
+  // closePopup() {
+  //   this.onClose.emit();
+  // }
 
   ngOnInit(): void {
     if (this.data.vamid != '' && this.data.vamid != null) {

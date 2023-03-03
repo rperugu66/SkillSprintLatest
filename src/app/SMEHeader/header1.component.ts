@@ -1,21 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { Router } from '@angular/router';
 
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faListUl } from '@fortawesome/free-solid-svg-icons';
+import { ApiService } from '../shared/api.service';
 
 @Component({
   selector: 'app-header1',
   templateUrl: './header1.component.html',
-  styleUrls: ['./header1.component.css']
+  styleUrls: ['./header1.component.css'],
 })
 export class Header1Component implements OnInit {
-  faHome=faHome;
+  faHome = faHome;
+  faUser = faUser;
+  faListUl = faListUl;
   collapsed = true;
+  name: any;
 
-  constructor(private router:Router) { }
-
-  ngOnInit(): void {
+  constructor(private router: Router, private api: ApiService) {}
+  isResourceOrSmepage() {
+    const currentRoute = this.router.url;
+    return currentRoute == '/resource' || currentRoute == '/SME';
   }
 
+  ngOnInit(): void {
+    this.api.getUsers().subscribe({
+      next: (data: any[]) => {
+        this.name = data[0].name;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
 }

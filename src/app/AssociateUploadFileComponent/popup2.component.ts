@@ -21,6 +21,7 @@ export class Popup2Component implements OnInit {
   code: string = '';
   editdata: any;
   datepipe: any;
+  // programStatus: "Submitted";
 
 
   setValue() {
@@ -76,8 +77,9 @@ export class Popup2Component implements OnInit {
         this.resp = response;
         this.formdata = this.builder.group({
           historyId: [this.resp.historyId],
-          programStatus: [this.resp.programStatus],
-          programCode: [this.resp.programCode]
+          programStatus:"Submitted",
+          programCode: [this.resp.programCode],
+          smeComments:[this.resp.smeComments]
 
           // smeStatus: [this.resp.smeStatus, Validators.required],
         });

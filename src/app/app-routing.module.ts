@@ -10,6 +10,7 @@ import { ProgramComponent } from './SMEComponent/program.component';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { registerLocaleData } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
+import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
 const routes: Routes = [
   {
     component: LoginComponent,
@@ -42,6 +43,12 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
   },
   {
+    component: ProgramComponent,
+    path: 'program/:id',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
+  },
+  {
     component: ViewAssignmentComponent,
     path: 'viewassignment',
     pathMatch: 'full',
@@ -54,7 +61,7 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
   },
   {
-    component: ProgramComponent,
+    component: SmeviewcomponentComponent,
     path: 'SME',
     pathMatch: 'full',
     // canActivate: [AuthGuardService],

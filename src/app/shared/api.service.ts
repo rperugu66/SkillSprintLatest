@@ -45,14 +45,14 @@ export class ApiService {
       'https://localhost:7260/api/Assign/' + '/' + id
     );
   }
-
+  //id: number;
   GetUserData(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
       'https://localhost:7260/api/Assign/GetResourceHistoryById' + '/' + id
-    );
-    //return this.http.get<companymodel[]>(this.apiurl+'/GetResourceHistoryById'+'/'+id);
-    //https://localhost:7260/api/Assign
 
+      //return this.http.get<companymodel[]>(this.apiurl+'/GetResourceHistoryById'+'/'+id);
+      // 'https://localhost:7260/api/Assign'
+    );
     //return this.http.get<companymodel[]>('https://localhost:7260/api/Assign/GetResourceHistoryById/'+id);
   }
 

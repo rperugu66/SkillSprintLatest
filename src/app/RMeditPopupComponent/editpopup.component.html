@@ -1,4 +1,11 @@
 
+<div style="text-align: center;">
+    <div style="padding-left: 400px;"><button style="color: red;border-color: red;" class="close-button"   (click)="closepopup()">X</button>   </div>
+    <h2>
+      <u style="color:teal">Associate details</u>
+    </h2>
+ 
+  </div>
 <form [formGroup]="editdata">
   <div class="form-row">
     <div class="form-group col-md-6" hidden>
@@ -7,6 +14,7 @@
     </div>
 
     <div class="form-group col-md-6">
+        <b style="color: red;">*</b> &nbsp;
       <label for="inputPassword4">VAM ID</label>
       <input
         type="text"
@@ -39,13 +47,14 @@
     </div>
 
     <div class="form-group col-md-6">
+        <b style="color: red;">*</b> &nbsp;
       <label for="inputState">TechTrack</label>
       <select
         class="custom-select mb-3"
         
         formControlName="techTrack"
       >
-        <option value="">Choose TechTrack</option>
+        <option value=""></option>
         <option *ngFor="let teckTrack of tecktracks" [ngValue]="teckTrack">
           {{ teckTrack }}
         </option>
@@ -76,6 +85,7 @@
 
   <div class="form-row">
     <div class="form-group col-md-6">
+        <b style="color: red;">*</b> &nbsp;
       <label for="inputCity">Start Date</label>
       <input
         id="date"
@@ -84,11 +94,13 @@
         type="date"
         placeholder="dd-mm-yyyy"
         formControlName="startDate"
+             [min]="minDate"
       />
     </div>
     <!--  value="{{ this.editdata.startDate | date : 'yyyy-MM-dd' }}" -->
 
     <div class="form-group col-md-6">
+        <b style="color: red;">*</b> &nbsp;
       <label for="inputState">End Date</label>
       <input
         class="form-control"
@@ -101,6 +113,7 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
+        <b style="color: red;">*</b> &nbsp;
       <label for="inputState">SME</label>
       <input
         class="form-control"
@@ -121,11 +134,11 @@
       />
     </div> -->
   </div>
-  <div class="example-button-row" style="margin: 2px;padding-left: 100px">
+  <div class="example-button-row" style="margin: 2px;padding-left: 100px">   &nbsp; &nbsp; &nbsp; &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp;
     <a (click)="SaveData()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px; background-color: #17a2b8;" >Save</a>
-    |&nbsp; |&nbsp; |&nbsp; |&nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp;
     <!-- <button mat-raised-button color="primary">Save</button> | -->
     <!-- <a (click)="closepopup()" mat-raised-button color="accent">Close</a> -->
-    <a (click)="closepopup()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" >Close</a>
+    <!-- <a (click)="closepopup()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" >Close</a> -->
   </div>
 </form>

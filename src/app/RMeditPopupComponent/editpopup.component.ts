@@ -18,13 +18,17 @@ export class EditpopupComponent implements OnInit {
   EditpopupComponent: any;
   Res: any;
   tecktracks: any = ['.NET', 'Java'];
+  minDate: string;
   constructor(
     private builder: FormBuilder,
     private dialog: MatDialog,
     private api: ApiService,
     private datepipe: DatePipe,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  ) {
+      const today = new Date();
+      this.minDate = today.toISOString().slice(0, 10);
+  }
 
 
   ngOnInit() {

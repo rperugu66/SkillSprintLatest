@@ -301,13 +301,16 @@
   <!-- *ngIf="!isResourceOrSmepage()" -->
   &nbsp;&nbsp;&nbsp;
   <button mat-button *ngIf="!isResourceOrSmepage()" [matMenuTriggerFor]="belowMenu">
-    <fa-icon [icon]="faListUl" size="1x" style="font-weight: 900;"></fa-icon>
+    <fa-icon [icon]="faListUl" size="2x" style="font-weight: 900;margin-top: 20px;"></fa-icon>
   </button>
-  <mat-menu #belowMenu="matMenu" yPosition="below">
+  <mat-menu #belowMenu="matMenu" yPosition="below" style="display: inline;background-color: #c2c3c4;">
     <button routerLink="company" mat-menu-item>New Assignment</button>
     <button routerLink="editassignment" mat-menu-item>Edit Assignment</button>
     <button routerLink="viewassignment" mat-menu-item>View Assignment</button>
   </mat-menu>
+
+  
+
 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

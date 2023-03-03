@@ -1,5 +1,6 @@
 
-  <b>Write Code: </b>
+    <div style="padding-left: 680px;"><button style="color: red;border-color: red;" class="close-button"   (click)="closepopup()">X</button></div>
+  <h3 style="color: teal;"><b><u>Write Code: </u></b></h3>
  <form [formGroup]="formdata"  >
         <!-- <input type="text" [(ngModel)] = "code" (change)="setValue()"> -->
     <div class="form-group">
@@ -9,15 +10,15 @@
   <div class="form-group">
     <!-- <label>Code</label> -->
     <textarea type="text"
-      style="width: 460px; height: 400px; resize: both"
+      style="width: 730px; height: 500px; resize: both"
       class="form-control"
    formControlName="programCode" 
    ></textarea>
     </div >
   
     <br />   
-    <div style="padding-left: 150px;">
-    <button class="btn btn-primary" (click)="onSubmit()"style=" font-size: 10px;background-color:#17a2b8; color:white;width: 75px;"  >Update</button>
+    <div style="padding-left: 300px; ">
+    <button style="height: 80px;width:120px;" class="btn btn-primary" (click)="onSubmit()"style=" font-size: 10px;background-color:#17a2b8; color:white;width: 75px;"  >Submit</button>
     </div>
   </form>
   <!-- formControlName="programCode" -->

@@ -41,6 +41,7 @@ import { DatePipe } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 
 import { SmeprogramcodepopupComponent } from './smeprogramcodepopup/smeprogramcodepopup.component';
+import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { SmeprogramcodepopupComponent } from './smeprogramcodepopup/smeprogramco
 
    
     SmeprogramcodepopupComponent,
-    CommentpopupComponent
+    CommentpopupComponent,
+    SmeviewcomponentComponent
   ],
   imports: [
     BrowserModule,

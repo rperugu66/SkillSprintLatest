@@ -18,6 +18,7 @@ import { Popup2Component } from '../AssociateUploadFileComponent/popup2.componen
 import { SmeprogramcodepopupComponent } from '../smeprogramcodepopup/smeprogramcodepopup.component';
 import { CommentpopupComponent } from '../SMEcommentPopupComponent/commentpopup.component';
 import da from '@mobiscroll/angular/dist/js/i18n/da';
+import { SmeviewcomponentComponent } from '../smeviewcomponent/smeviewcomponent.component';
 
 @Component({
   selector: 'app-program',
@@ -70,7 +71,7 @@ export class ProgramComponent implements OnInit {
   ];
   Openpopup(data: any) {
     const _popup = this.dialog.open(SmeprogramcodepopupComponent, {
-      width: '500px',
+      width: '700px',
       exitAnimationDuration: '1000ms',
       enterAnimationDuration: '1000ms',
       data: {
@@ -97,17 +98,22 @@ export class ProgramComponent implements OnInit {
   }
 
   LoadCompany() {
-    this.value = localStorage.getItem('id');
-    this.api.GetUserData(this.value).subscribe((response) => {
+     this.value = localStorage.getItem('id');
+     this.api.GetUserData(this.value).subscribe((response) => {
       this.companydata = response;
-      var finaldata = this.companydata;
-      var finaldata = this.companydata.filter(
-        (item: any) => item.sme === this.currentLogInsme.name
-      );
-      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
-      // this.finaldata.paginator = this._paginator;
-      // this.finaldata.sort = this._sort;
-    });
+    //  this.api.Getallcomapny().subscribe((response) => {
+    //    this.companydata = response;
+       var finaldata = this.companydata;
+       var finaldata = this.companydata.filter(
+         (item: any) =>
+           item.programStatus === 'Submitted' ||
+           item.programStatus === 'Under Review' ||
+           item.programStatus === 'Approved'
+       );
+       this.finaldata = new MatTableDataSource<companymodel>(finaldata);
+       // this.finaldata.paginator = this._paginator;
+       // this.finaldata.sort = this._sort;
+     });
   }
 
   routing(historyId: any) {

@@ -1,4 +1,12 @@
-<form [formGroup]="companyform">
+<form [formGroup]="companyform" >
+
+  
+  <div style="text-align: center;">
+    <div style="padding-left: 400px;"><button style="color: red;border-color: red;" class="close-button"   (click)="closepopup()">X</button></div>
+    <h2>
+      <u style="color:teal">Associate details</u>
+    </h2>
+  </div>
   <div class="form-row">
     <div class="form-group" hidden>
       <label for="inputEmail4">ID</label>
@@ -15,6 +23,7 @@
     </div>
 
     <div class="form-group col-md-6">
+      <b style="color: red;">*</b> &nbsp;
       <label for="inputPassword4">VAM ID</label>
       <input
         type="text"
@@ -58,7 +67,8 @@
       />
     </div>
     <div class="form-group col-md-6">
-      <label for="inputAddress2">PM/DM</label>
+      <b style="color: red;">*</b> &nbsp;
+      <label for="inputAddress2">PM/DM Email</label>
       <input
         type="text"
         class="form-control"
@@ -73,7 +83,8 @@
     </div>
 
     <div class="form-group col-md-6">
-      <label for="inputState">Technology Track</label>
+      <b style="color: red;">*</b> &nbsp;
+      <label for="inputState">Tech Track</label>
       <select
         id="inputState"
         class="form-control"
@@ -118,6 +129,7 @@
     </div> -->
   <div class="form-row">
     <div class="form-group col-md-6">
+      <b style="color: red;">*</b> &nbsp;
       <label for="inputCity">Start Date</label>
       <input
         id="startDate"
@@ -127,7 +139,7 @@
         formControlName="startDate"
         (change)="getEndDate($event)"
         name="startDate"
-        [min]="todayDate"
+        [min]="minDate"
       />
     </div>
 
@@ -157,7 +169,8 @@
   </div>
   <div class="form-row">
     <div class="form-group col-md-6">
-      <label for="inputState">SME</label>
+      <b style="color: red;">*</b> &nbsp;
+      <label for="inputState">SME Email</label>
       <select
         id="inputState"
         class="form-control"
@@ -174,10 +187,12 @@
     </div>
   </div>
   <div class="example-button-row" style="margin: 2px;padding-left: 100px;">
+       &nbsp; &nbsp; &nbsp; &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;
     <a type="button" (click)="submit()" class="btn btn-info" style="font-size: 10px;color:white;width: 75px;" >Save</a>&nbsp;
-    |&nbsp; |&nbsp; |&nbsp; |&nbsp;
+    &nbsp; &nbsp; &nbsp; &nbsp;
     <!-- <button mat-raised-button color="primary" (click)="submit()">Save</button>&nbsp; |&nbsp; -->
     <!-- <a (click)="closepopup()" mat-raised-button color="accent" >Close</a> -->
-    <a (click)="closepopup()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" >Close</a>
+    <!-- <a (click)="closepopup()" type="button" class="btn btn-secondary" style="font-size: 10px;color:white;width: 75px;" >Close</a> -->
   </div>
+
 </form>
