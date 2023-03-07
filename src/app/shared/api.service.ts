@@ -14,27 +14,33 @@ export class ApiService {
     throw new Error('Method not implemented.');
   }
   constructor(private http: HttpClient) {}
-  apiurl = 'https://localhost:7260/api/Assign';
+  apiurl = 'https://programsautoassign.azurewebsites.net/api/Assign';
 
   Getallcomapny(): Observable<companymodel[]> {
-    return this.http.get<companymodel[]>(this.apiurl);
+    return this.http.get<companymodel[]>(
+      'https://programsautoassign.azurewebsites.net/api/Assign'
+    );
   }
 
   GetAllHistoryRecordsById(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
-      'https://localhost:7260/api/Assign/GetResourceHistoryById' + '/' + id
+      'https://programsautoassign.azurewebsites.net/api/Assign/GetResourceHistoryById' +
+        '/' +
+        id
     );
   }
 
   GetUserByEmail(email: string): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
-      'https://localhost:7260/api/Assign/GetResourceByEmail' + '/' + email
+      'https://programsautoassign.azurewebsites.net/api/Assign/GetResourceByEmail' +
+        '/' +
+        email
     );
   }
 
   GetCompanybycode(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
-      'https://localhost:7260/api/Assign/GetResourceHistorySingleById' +
+      'https://programsautoassign.azurewebsites.net/api/Assign/GetResourceHistorySingleById' +
         '/' +
         id
     );
@@ -42,13 +48,15 @@ export class ApiService {
 
   GetCompanybyId(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
-      'https://localhost:7260/api/Assign/' + '/' + id
+      'https://programsautoassign.azurewebsites.net/api/Assign' + '/' + id
     );
   }
   //id: number;
   GetUserData(id: number): Observable<companymodel[]> {
     return this.http.get<companymodel[]>(
-      'https://localhost:7260/api/Assign/GetResourceHistoryById' + '/' + id
+      'https://programsautoassign.azurewebsites.net/api/Assign/GetResourceHistoryById' +
+        '/' +
+        id
 
       //return this.http.get<companymodel[]>(this.apiurl+'/GetResourceHistoryById'+'/'+id);
       // 'https://localhost:7260/api/Assign'
@@ -61,7 +69,10 @@ export class ApiService {
   }
 
   CreateComapny(companyform: any) {
-    return this.http.post('https://localhost:7260/api/Assign', companyform);
+    return this.http.post(
+      'https://programsautoassign.azurewebsites.net/api/Assign',
+      companyform
+    );
   }
 
   UpdateComapny(id: any, companydata: any) {
@@ -73,7 +84,9 @@ export class ApiService {
     );
 
     return this.http.put(
-      'https://localhost:7260/api/Assign/UpdateResourceHistory' + '/' + id,
+      'https://programsautoassign.azurewebsites.net/api/Assign/UpdateResourceHistory' +
+        '/' +
+        id,
       companydata,
       { headers: headers }
     );
@@ -88,14 +101,16 @@ export class ApiService {
     );
 
     return this.http.put(
-      'https://localhost:7260/api/Assign/UpdateResourceHistoryCode' + '/' + id,
+      'https://programsautoassign.azurewebsites.net/api/Assign/UpdateResourceHistoryCode' +
+        '/' +
+        id,
       code,
       { headers: headers }
     );
   }
   GetProgramCode(id: any) {
     return this.http.get(
-      'https://localhost:7260/api/Assign/GetResourceHistorySingleById' +
+      'https://programsautoassign.azurewebsites.net/api/Assign/GetResourceHistorySingleById' +
         '/' +
         id
     );
@@ -109,7 +124,9 @@ export class ApiService {
     );
 
     return this.http.put(
-      'https://localhost:7260/api/Assign/UpdateResourceHistoryCode' + '/' + id,
+      'https://programsautoassign.azurewebsites.net/api/Assign/UpdateResourceHistoryCode' +
+        '/' +
+        id,
       comments,
       { headers: headers }
     );
@@ -117,24 +134,31 @@ export class ApiService {
 
   getProgramDropDown(): Observable<any> {
     return this.http.get<techtracks[]>(
-      'https://localhost:7260/api/ProgramTracker/GetTechTracks'
+      'https://programsautoassign.azurewebsites.net/api/ProgramTracker/GetTechTracks'
     );
   }
   getUserInfo(vamid: any): Observable<any> {
     return this.http.get<userInfo[]>(
-      'https://localhost:7260/api/UserInfo/' + vamid
+      'https://programsautoassign.azurewebsites.net/api/UserInfo/' +
+        vamid
     );
   }
 
   getendDateApi(startDate: any): Observable<any> {
     return this.http.get<[]>(
-      'https://localhost:7260/api/VAMHoliday?startDate=' + startDate
+      'https://programsautoassign.azurewebsites.net/api/VAMHoliday?startDate=' +
+        startDate
     );
   }
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>('https://localhost:7260/api/Employees');
+    return this.http.get<User[]>(
+      'https://programsautoassign.azurewebsites.net/api/Employees'
+    );
   }
   CreateUser(userModel: any) {
-    return this.http.post('https://localhost:7260/api/Employees', userModel);
+    return this.http.post(
+      'https://programsautoassign.azurewebsites.net/api/Employees',
+      userModel
+    );
   }
 }

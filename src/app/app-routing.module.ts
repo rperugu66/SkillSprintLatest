@@ -11,6 +11,8 @@ import { AuthGuardService } from './shared/auth-guard.service';
 import { registerLocaleData } from '@angular/common';
 import { RegistrationComponent } from './registration/registration.component';
 import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
+import { RMSMEViewComponent } from './rmsmeview/rmsmeview.component';
+import { RmsmeeditComponent } from './rmsmeedit/rmsmeedit.component';
 const routes: Routes = [
   {
     component: LoginComponent,
@@ -49,8 +51,20 @@ const routes: Routes = [
     // canActivate: [AuthGuardService],
   },
   {
+    component: RmsmeeditComponent,
+    path: 'rmsmeedit/:id',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
+  },
+  {
     component: ViewAssignmentComponent,
     path: 'viewassignment',
+    pathMatch: 'full',
+    // canActivate: [AuthGuardService],
+  },
+  {
+    component: RMSMEViewComponent,
+    path: 'smeassignment',
     pathMatch: 'full',
     // canActivate: [AuthGuardService],
   },

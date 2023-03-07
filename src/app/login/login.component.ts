@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
             state: { vamid: varVamId, userid: this.userRecord.id },
           });
         }
-        var varSME = varLoginUser[0].name;
+        var varSME = varLoginUser[0].email;
         if (varEmail == 'SME') {
           // this.router.navigateByUrl('SME');
           this.router.navigateByUrl('SME', {
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           });
           console.log(varEmail);
         }
-        if (varEmail == 'Resource Manager') {
+        if (varEmail == 'Manager') {
           this.router.navigateByUrl('company');
         } else {
           this.message = 'Your email or password was not valid';

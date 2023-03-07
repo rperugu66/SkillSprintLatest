@@ -42,6 +42,8 @@ import { RegistrationComponent } from './registration/registration.component';
 
 import { SmeprogramcodepopupComponent } from './smeprogramcodepopup/smeprogramcodepopup.component';
 import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
+import { RMSMEViewComponent } from './rmsmeview/rmsmeview.component';
+import { RmsmeeditComponent } from './rmsmeedit/rmsmeedit.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.c
    
     SmeprogramcodepopupComponent,
     CommentpopupComponent,
-    SmeviewcomponentComponent
+    SmeviewcomponentComponent,
+    RMSMEViewComponent,
+    RmsmeeditComponent
   ],
   imports: [
     BrowserModule,

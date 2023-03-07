@@ -167,7 +167,20 @@
       />
     </div> -->
   </div>
-  <div class="form-row">
+  <div class="form-group col-md-6">
+      <b style="color: red;">*</b> &nbsp;
+      <label for="inputState">SME Email</label>
+      <input
+        id="inputState"
+        class="form-control"
+        formControlName="sme"
+        [(ngModel)]="sme"
+        name="SME"
+        #ngModel
+        required
+      />
+    </div>
+  <!-- <div class="form-row">
     <div class="form-group col-md-6">
       <b style="color: red;">*</b> &nbsp;
       <label for="inputState">SME Email</label>
@@ -185,7 +198,7 @@
         <option>rupesh kumar perugu</option>
       </select>
     </div>
-  </div>
+  </div> -->
   <div class="example-button-row" style="margin: 2px;padding-left: 100px;">
        &nbsp; &nbsp; &nbsp; &nbsp;    &nbsp; &nbsp; &nbsp; &nbsp;
     <a type="button" (click)="submit()" class="btn btn-info" style="font-size: 10px;color:white;width: 75px;" >Save</a>&nbsp;

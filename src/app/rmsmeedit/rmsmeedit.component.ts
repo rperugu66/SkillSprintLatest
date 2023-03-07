@@ -20,13 +20,14 @@ import { CommentpopupComponent } from '../SMEcommentPopupComponent/commentpopup.
 import da from '@mobiscroll/angular/dist/js/i18n/da';
 import { SmeviewcomponentComponent } from '../smeviewcomponent/smeviewcomponent.component';
 import { Element } from '@angular/compiler';
+import { RMSMEViewComponent } from '../rmsmeview/rmsmeview.component';
 
 @Component({
-  selector: 'app-program',
-  templateUrl: './program.component.html',
-  styleUrls: ['./program.component.css'],
+  selector: 'app-rmsmeedit',
+  templateUrl: './rmsmeedit.component.html',
+  styleUrls: ['./rmsmeedit.component.css'],
 })
-export class ProgramComponent implements OnInit {
+export class RmsmeeditComponent implements OnInit {
   faHome = faHome;
   faSearch = faSearch;
   faArrowDown = faArrowDown;
@@ -50,9 +51,9 @@ export class ProgramComponent implements OnInit {
 
   ngOnInit(): void {
     this.LoadCompany();
-    
-     this.startdate.setDate(this.finaldata.endDate + 1);
-      this.enddate.setDate(this.finaldata.endDate + 4);
+
+    this.startdate.setDate(this.finaldata.endDate + 1);
+    this.enddate.setDate(this.finaldata.endDate + 4);
   }
 
   displayColums: string[] = [
@@ -104,22 +105,22 @@ export class ProgramComponent implements OnInit {
   }
 
   LoadCompany() {
-     this.value = localStorage.getItem('id');
-     this.api.GetUserData(this.value).subscribe((response) => {
+    this.value = localStorage.getItem('id');
+    this.api.GetUserData(this.value).subscribe((response) => {
       this.companydata = response;
-    //  this.api.Getallcomapny().subscribe((response) => {
-    //    this.companydata = response;
-       var finaldata = this.companydata;
-       var finaldata = this.companydata.filter(
-         (item: any) =>
-           item.programStatus === 'Submitted' ||
-           item.programStatus === 'Under Review' ||
-           item.programStatus === 'Approved'
-       );
-       this.finaldata = new MatTableDataSource<companymodel>(finaldata);
-       // this.finaldata.paginator = this._paginator;
-       // this.finaldata.sort = this._sort;
-     });
+      //  this.api.Getallcomapny().subscribe((response) => {
+      //    this.companydata = response;
+      var finaldata = this.companydata;
+      // var finaldata = this.companydata.filter(
+      //   (item: any) =>
+      //     item.programStatus === 'Submitted' ||
+      //     item.programStatus === 'Under Review' ||
+      //     item.programStatus === 'Approved'
+      // );
+      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
+      // this.finaldata.paginator = this._paginator;
+      // this.finaldata.sort = this._sort;
+    });
   }
 
   routing(historyId: any) {
@@ -151,5 +152,6 @@ export class ProgramComponent implements OnInit {
     this.finaldata.filter = filterValue.trim().toLowerCase();
   }
 }
+
 
 
