@@ -1,18 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
-// @Component({
-//   selector: 'app-smeviewcomponent',
-//   templateUrl: './smeviewcomponent.component.html',
-//   styleUrls: ['./smeviewcomponent.component.css']
-// })
-// export class SmeviewcomponentComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { companymodel } from '../Model/companymodel';
@@ -38,12 +23,13 @@ export class SmeviewcomponentComponent implements OnInit {
   faSearch = faSearch;
   searchLeaveApplication: any;
   currentLogInsme: any;
+  name: any;
   //searchStartDate: any;
 
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
-    private router: Router,
+    public router: Router,
     private datePipe: DatePipe
   ) {
     this.currentLogInsme = this.router.getCurrentNavigation()?.extras.state;
@@ -56,6 +42,15 @@ export class SmeviewcomponentComponent implements OnInit {
 
   ngOnInit(): void {
     this.LoadCompany();
+       let name = sessionStorage.getItem('currentUser');
+        // this.api.getUsers().subscribe({
+        //   next: (data: any[]) => {
+        //     this.name = data[1].name;
+        //   },
+        //   error: (error) => {
+        //     console.log(error);
+        //   },
+        // });
   }
   saveData() {
     const searchStartDate = this.datePipe.transform(
@@ -70,6 +65,7 @@ export class SmeviewcomponentComponent implements OnInit {
     'resourceName',
     'manager',
     'techTrack',
+    // 'category',
     'startDate',
     'endDate',
     'sme',

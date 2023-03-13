@@ -31,7 +31,7 @@ export class Company1Component implements OnInit {
     private dialog: MatDialog,
     private api: ApiService,
     public submitService: SubmitService,
-    private router: Router
+    public router: Router
   ) {
     this.currentLogInVamId = this.router.getCurrentNavigation()?.extras.state;
   }
@@ -42,16 +42,18 @@ export class Company1Component implements OnInit {
 
   ngOnInit(): void {
     this.LoadCompany();
-    this.api.getUsers().subscribe({
-      next: (data: any[]) => {
-        this.name = data[0].name;
-        this.vamid = data[1].vamid;
-      },
-      error: (error) => {
-        console.log(error);
-      },
+    // this.api.getUsers().subscribe({
+    //   next: (data: any[]) => {
+    //     this.name = data[0].name;
+    //     this.vamid = data[1].vamid;
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   },
       
-    });
+    // });
+    this.name = sessionStorage.getItem('currentUser');
+    this.vamid=  sessionStorage.getItem('currentUserVamId');
       
   }
 
@@ -59,7 +61,7 @@ export class Company1Component implements OnInit {
     'id',
     // 'historyId',
     'techTrack',
-    // 'Category',
+    'Category',
     'program',
     'startDate',
     'endDate',

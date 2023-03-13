@@ -14,6 +14,7 @@ import { EditassignmentComponent } from '../RMeditAssignmentComponent/editassign
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
+
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
@@ -23,14 +24,19 @@ export class CompanyComponent implements OnInit {
   faHome = faHome;
   faSearch = faSearch;
   searchLeaveApplication: any;
+  varCurrentUser: any;
   //searchStartDate: any;
+
+  // faHome = faHome;
 
   constructor(
     private dialog: MatDialog,
     private api: ApiService,
     private router: Router,
     private datePipe: DatePipe
-  ) {}
+  ) {
+    this.varCurrentUser = this.router.getCurrentNavigation()?.extras.state;
+  }
   @ViewChild(MatPaginator) _paginator!: MatPaginator;
   @ViewChild(MatSort) _sort!: MatSort;
   companydata!: companymodel[];
@@ -39,6 +45,7 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit(): void {
     this.LoadCompany();
+    // this.router.navigate(['/header'], { state: { name: this.varCurrentUser } });
   }
   saveData() {
     const searchStartDate = this.datePipe.transform(
@@ -46,6 +53,11 @@ export class CompanyComponent implements OnInit {
       'yyyy-MM-dd'
     );
     // handle the rest
+  }
+
+  isResourceOrSmepage() {
+    const currentRoute = this.router.url;
+    return currentRoute == '/resource' || currentRoute == '/SME';
   }
 
   displayColums: string[] = [

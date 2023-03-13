@@ -52,6 +52,7 @@ export class EditassignmentComponent implements OnInit {
   Openpopup(data: any) {
     const _popup = this.dialog.open(EditpopupComponent, {
       width: '500px',
+      height:'600px',
       exitAnimationDuration: '1000ms',
       enterAnimationDuration: '1000ms',
       data: {

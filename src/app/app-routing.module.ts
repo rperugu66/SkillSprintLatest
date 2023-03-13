@@ -13,6 +13,8 @@ import { RegistrationComponent } from './registration/registration.component';
 import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
 import { RMSMEViewComponent } from './rmsmeview/rmsmeview.component';
 import { RmsmeeditComponent } from './rmsmeedit/rmsmeedit.component';
+import { Header1Component } from './SMEHeader/header1.component';
+import { HeaderComponent } from './RMHeader/header.component';
 const routes: Routes = [
   {
     component: LoginComponent,
@@ -83,6 +85,11 @@ const routes: Routes = [
   {
     component: LoginComponent,
     path: '',
+    pathMatch: 'full',
+  },
+  {
+    component: HeaderComponent,
+    path: 'header',
     pathMatch: 'full',
   },
 ];

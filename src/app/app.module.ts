@@ -44,6 +44,7 @@ import { SmeprogramcodepopupComponent } from './smeprogramcodepopup/smeprogramco
 import { SmeviewcomponentComponent } from './smeviewcomponent/smeviewcomponent.component';
 import { RMSMEViewComponent } from './rmsmeview/rmsmeview.component';
 import { RmsmeeditComponent } from './rmsmeedit/rmsmeedit.component';
+import { AssociateHeaderComponent } from './associate-header/associate-header.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { RmsmeeditComponent } from './rmsmeedit/rmsmeedit.component';
     CommentpopupComponent,
     SmeviewcomponentComponent,
     RMSMEViewComponent,
-    RmsmeeditComponent
+    RmsmeeditComponent,
+    AssociateHeaderComponent
   ],
   imports: [
     BrowserModule,

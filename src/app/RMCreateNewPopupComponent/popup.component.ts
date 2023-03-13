@@ -190,7 +190,10 @@ export class PopupComponent implements OnInit {
       sme: this.sme,
     };
     this.http
-      .post('https://localhost:7260/api/Assign', companyform)
+      .post(
+        'https://programsautoassign.azurewebsites.net/api/Assign',
+        companyform
+      )
       .subscribe((res) => console.log(res));
     //console.log(companyform);
     this.closepopup();

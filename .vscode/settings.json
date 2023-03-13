@@ -1,6 +1,6 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/bd06f568-831e-407d-b6be-a651dbcc9e31/resourceGroups/Programs_Auto_Assign/providers/Microsoft.Web/sites/codexer",
-    "appService.deploySubpath": "C:\\Users\\rupeshp\\Angular\\codeexer-master\\codeexer-master\\dist",
+    "appService.deploySubpath": "",
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"

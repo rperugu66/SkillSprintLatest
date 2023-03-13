@@ -20,23 +20,30 @@ export class HeaderComponent implements OnInit {
   collapsed = true;
   faListUl = faListUl;
   name: any;
+  // CurrentUser: any;
+   varCurrentUser: any;
+  // varCurrentLoginUser: any;
+  data: any;
+  loginform: any;
+  varLoginUser: any;
   // userData: any[];
   // loginform: any;
   // varUserName: any;
 
-  constructor(
-    private router: Router,
-    private api: ApiService
-
-  
-  ) { }
+  constructor(public router: Router, private api: ApiService) {
+    // this.varCurrentLoginUser = this.router.getCurrentNavigation()?.extras.state;
+  }
   // private api: ApiService // private http: HttpClient, // private builder: FormBuilder,
 
   //ngOnInit(): void {}
 
   isResourceOrSmepage() {
     const currentRoute = this.router.url;
-    return currentRoute == '/resource' || currentRoute == '/SME';
+    return (
+      currentRoute == '/resource' ||
+      currentRoute == '/SME'
+   
+    );
   }
   // isResourceOrSmepage(): boolean {
   //   return (
@@ -46,11 +53,16 @@ export class HeaderComponent implements OnInit {
   // }
 
   ngOnInit(): void {
-
-    this.api.getUsers().subscribe({
-      next: (data: any[]) =>
-      { this.name = data[0].name; }, error: (error) => { console.log(error); }
-    });
+    this.name= sessionStorage.getItem('currentUser');
+    console.log(this.name);
+    // this.api.getUsers().subscribe({
+    //   next: (data: any[]) =>
+    //   { this.name = data[6].name; },
+    //   error: (error) => {
+    //     console.log(error);
+    //   }
+    // });
+    // {this.name = data[0].name; }, error: (error) => { console.log(error); }
   }
 
   signIn() {}

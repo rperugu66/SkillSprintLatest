@@ -49,13 +49,12 @@
     <div class="form-group col-md-6">
         <b style="color: red;">*</b> &nbsp;
       <label for="inputState">TechTrack</label>
-      <select
-        class="custom-select mb-3"
-        
+      <select  
+        class="custom-select mb-3" 
         formControlName="techTrack"
       >
-        <option value=""></option>
-        <option *ngFor="let teckTrack of tecktracks" [ngValue]="teckTrack">
+        <option value="" ></option>
+        <option *ngFor="let teckTrack of tecktracks" [ngValue]="teckTrack" >
           {{ teckTrack }}
         </option>
       </select>

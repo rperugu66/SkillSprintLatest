@@ -1,22 +1,24 @@
+
 <div style="font-family: Gill sans MT-12px">
   <h2
     style="font-family: Gill sans MT-12px; font-size: 22px; margin-top: -1.5%"
   >
     
-    <u style="color: teal"
-      ><b
+   <br>
+      <b
         style="
-          padding-left: 550px;
+          padding-left: 470px;
 
-          color: teal;
+          color: black;
         "
-        >Resource Manager View</b
-      ></u
-    >
+        >Resource Manager - New Assignment</b
+      >
+
   </h2>
- <h2 style="font-family: Gill sans MT-12px; font-size: 22px; margin-top: -1.5%">
+ <!-- <h2 style="font-family: Gill sans MT-12px; font-size: 22px; margin-top: -1.5%">
   New Assignment
-</h2>
+</h2> -->
+
 
   <!-- <p style="font-family: Gill sans MT-12px;">Resource Manager - <strong>Vasudha</strong></p> -->
 
@@ -68,7 +70,7 @@
           *matHeaderCellDef
           style="color: white; font-size: 15px"
         >
-          <strong>VAM ID</strong>
+          <strong>VM ID</strong>
         </th>
         <td mat-cell *matCellDef="let element">{{ element.vamid }}</td>
       </ng-container>
@@ -78,9 +80,9 @@
           mat-header-cell
           *matHeaderCellDef
           mat-sort-heade
-          style="color: white; font-size: 15px"
+          style="color: white; font-size: 15px;" 
         >
-          <strong> Name</strong>
+          <strong> &nbsp; Name</strong>
         </th>
         <td mat-cell *matCellDef="let element">{{ element.resourceName }}</td>
       </ng-container>
@@ -107,7 +109,7 @@
           *matHeaderCellDef
           style="color: white; font-size: 15px"
         >
-          <strong>Technology Track</strong>
+          <strong>Tech Track</strong>
         </th>
         <td mat-cell *matCellDef="let element">{{ element.techTrack }}</td>
       </ng-container>

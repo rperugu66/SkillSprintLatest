@@ -20,6 +20,8 @@ import { CommentpopupComponent } from '../SMEcommentPopupComponent/commentpopup.
 import da from '@mobiscroll/angular/dist/js/i18n/da';
 import { SmeviewcomponentComponent } from '../smeviewcomponent/smeviewcomponent.component';
 import { Element } from '@angular/compiler';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-program',
@@ -32,9 +34,11 @@ export class ProgramComponent implements OnInit {
   faArrowDown = faArrowDown;
   faDownload = faDownload;
   currentLogInsme: any;
+
   value: any;
   enddate: Date;
   startdate: any;
+  name: any;
 
   constructor(
     private dialog: MatDialog,
@@ -45,20 +49,38 @@ export class ProgramComponent implements OnInit {
   }
   @ViewChild(MatPaginator) _paginator!: MatPaginator;
   @ViewChild(MatSort) _sort!: MatSort;
-  companydata!: companymodel[];
+  companydata: any;
   finaldata: any;
-
+  varStartDate: Date;
   ngOnInit(): void {
     this.LoadCompany();
-    
-     this.startdate.setDate(this.finaldata.endDate + 1);
-      this.enddate.setDate(this.finaldata.endDate + 4);
+    this.name = sessionStorage.getItem('currentUser');
+
+    // const updatedDisplayColumns1 = this.displayColums1.map((column) => {
+    //   if (column === 'startDate') {
+    //     const startDatePlusOne = moment(this.finaldata.startDate).add(1, 'days');
+    //     // console.log("startDatePlusOne:", startDatePlusOne);
+    //     // console.log("hi");
+    //     return 'startDatePlusOne';
+    //   } else {
+    //     return column;
+    //   }
+    // });
+
+    // this.displayColums1 = updatedDisplayColumns1;
+
+    // this.startdate.setDate(this.finaldata.endDate + 1);
+    // this.enddate.setDate(this.finaldata.endDate + 4);
+
+    // this.varStartDate.setDate(this.startdate + 1);
+    // console.log(this.varStartDate);
   }
 
   displayColums: string[] = [
     'vamid',
     'resourceName',
     'techTrack',
+    // 'category',
     'program',
     'startDate',
     'endDate',
@@ -103,23 +125,57 @@ export class ProgramComponent implements OnInit {
     });
   }
 
+  addDays(date: Date, days: number) {
+    console.log(typeof date);
+    date.setDate(date.getDate() + 1);
+
+    return date;
+  }
+  addEndDays(date: Date, days: number) {
+    console.log(typeof date);
+    date.setDate(date.getDate() + 4);
+
+    return date;
+  }
+
   LoadCompany() {
-     this.value = localStorage.getItem('id');
-     this.api.GetUserData(this.value).subscribe((response) => {
+    this.value = localStorage.getItem('id');
+    this.api.GetUserData(this.value).subscribe((response) => {
+      for (let i = 0; i < response.length; i++) {
+        response[i].endDate = new Date(response[i].endDate);
+      }
+
       this.companydata = response;
-    //  this.api.Getallcomapny().subscribe((response) => {
-    //    this.companydata = response;
-       var finaldata = this.companydata;
-       var finaldata = this.companydata.filter(
-         (item: any) =>
-           item.programStatus === 'Submitted' ||
-           item.programStatus === 'Under Review' ||
-           item.programStatus === 'Approved'
-       );
-       this.finaldata = new MatTableDataSource<companymodel>(finaldata);
-       // this.finaldata.paginator = this._paginator;
-       // this.finaldata.sort = this._sort;
-     });
+      // console.log(this.companydata)
+      let finaldata = JSON.parse(JSON.stringify(this.companydata));
+
+      this.companydata = new MatTableDataSource<companymodel>(this.companydata);
+
+      //  this.api.Getallcomapny().subscribe((response) => {
+      //    this.companydata = response;
+
+      for (let i = 0; i < finaldata.length; i++) {
+        finaldata[i].startDate = this.addDays(
+          new Date(finaldata[i].endDate),
+          1
+        );
+      }
+      for (let i = 0; i < finaldata.length; i++) {
+        finaldata[i].endDate = this.addEndDays(new Date(finaldata[i].endDate), 4);
+      }
+      // console.log(finaldata);
+      // console.log(response);
+
+      finaldata = finaldata.filter(
+        (item: any) =>
+          item.programStatus === 'Submitted' ||
+          item.programStatus === 'Under Review' ||
+          item.programStatus === 'Approved'
+      );
+      this.finaldata = new MatTableDataSource<companymodel>(finaldata);
+      // this.finaldata.paginator = this._paginator;
+      // this.finaldata.sort = this._sort;
+    });
   }
 
   routing(historyId: any) {

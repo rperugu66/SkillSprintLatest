@@ -56,7 +56,7 @@
       <div class="global-container">
         <div class="card login-form">
           <div class="card-body">
-            <h2 class="card-title text-center"><b>Login</b></h2>
+            <h2 class="fontStyle" style="text-align: center;"><b>Login</b></h2>
             <div class="card-text">
               <div
                 class="warning"
@@ -67,7 +67,7 @@
               </div>
               <form [formGroup]="loginform">
                 <div class="form-group">
-                  <label for="exampleInputEmail1"> Enter Email Address </label>
+                  <label class="fontStyle" for="exampleInputEmail1"> Enter Email Address <b style="color: red;">*</b> &nbsp; </label>
                   <input
                     type="email"
                     formControlName="email"
@@ -78,10 +78,10 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Enter Password </label>
-                  <!-- <a href="#" style="float: right; font-size: 12px">
+                  <label class="fontStyle" for="exampleInputPassword1">Enter Password <b style="color: red;">*</b> &nbsp; </label>
+                  <a href="#" style="float: right; font-size: 12px">
                     Forgot password?
-                  </a> -->
+                  </a>
                   <input
                     type="password"
                     formControlName="password"
@@ -94,14 +94,14 @@
                   type="submit"
                   class="btn btn-primary btn-block"
                   (click)="signIn()"
-                ><b>LogIn</b>
+                ><b>Login</b>
                   
                 </button>
 
-                <!-- <div class="sign-up">
+                 <div class="sign-up">
                   Don't have an account?
                   <a href="/Registration"> Create One </a>
-                </div> -->
+                </div>
               </form>
             </div>
           </div>

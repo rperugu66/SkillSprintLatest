@@ -15,14 +15,14 @@
   <div>
     <p style="font-size: 18px; font-family: Gill Sans MT-12">
       <b>SME:&nbsp;</b
-      ><label style="font-family: Gill Sans MT-12">Rupesh Kumar Perugu</label>
+      ><label style="font-family: Gill Sans MT-12">{{this.name}}</label>
     </p>
   </div>
 
   <p></p>
   <p style="font-size: 18px; font-family: Gill Sans MT-12">
     <b>Resource Manager:&nbsp;</b
-    ><label style="font-family: Gill Sans MT-12">Masoor Vasudha</label>
+    ><label style="font-family: Gill Sans MT-12">Vasudha Masoor</label>
   </p>
 </div>
 
@@ -37,7 +37,7 @@
 
   <table
     mat-table
-    [dataSource]="finaldata"
+    [dataSource]="companydata"
     matSort
     class="mat-elevation-z8"
     style="margin: 0% 0% 0% 0%"
@@ -264,7 +264,7 @@
       >
         <b> Start Date</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </th>
-      <td mat-cell *matCellDef="let element">{{element.endDate  | date }} 
+      <td mat-cell *matCellDef="let element">{{element.startDate | date }} 
         
       </td>
     </ng-container>

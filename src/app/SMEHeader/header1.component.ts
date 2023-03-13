@@ -25,13 +25,15 @@ export class Header1Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.api.getUsers().subscribe({
-      next: (data: any[]) => {
-        this.name = data[0].name;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+    this.name = sessionStorage.getItem('currentUser');
+      //  console.log(this.name);
+    // this.api.getUsers().subscribe({
+    //   next: (data: any[]) => {
+    //     this.name = data[1].name;
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //   },
+    // });
   }
 }

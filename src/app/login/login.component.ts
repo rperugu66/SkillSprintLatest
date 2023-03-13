@@ -19,13 +19,14 @@ export class LoginComponent implements OnInit {
   userData: any;
   varUserEmail: any;
   userRecord: any;
+  varCurrentUser: any;
 
   constructor(
     private authService: AuthService,
     private api: ApiService,
     private http: HttpClient,
     private builder: FormBuilder,
-    private router: Router
+    public router: Router
   ) {}
   loginform = this.builder.group({
     email: this.builder.control('', Validators.required),
@@ -33,24 +34,29 @@ export class LoginComponent implements OnInit {
   });
 
 
+  
   ngOnInit(): void {}
 
   signIn() {
     if (this.loginform.valid) {
       this.api.getUsers().subscribe((data: any[]) => {
         this.userData = data;
-        // var vamid = '';
-        var varLoginUser = this.userData.filter(
-          (item: any) =>
-            item.email === this.loginform.value.email &&
-            item.password === this.loginform.value.password
-        );
+             var varLoginUser = this.userData.filter(
+               (item: any) =>
+                 item.email === this.loginform.value.email &&
+                 item.password === this.loginform.value.password
+             );
+ 
+
         var varEmail = varLoginUser.map((x: any) => x.role);
         var varVamId = varLoginUser[0].vamid;
         var varUserEmail = varLoginUser[0].email;
         this.api.GetUserByEmail(varUserEmail).subscribe((userRecord: any) => {
           this.userRecord = userRecord;
         });
+         var varCurrentUser = varLoginUser[0].name;
+        sessionStorage.setItem('currentUser', varCurrentUser);
+         sessionStorage.setItem('currentUserVamId', varVamId);
 
         if (varEmail == 'Associate') {
           this.router.navigateByUrl('resource', {
@@ -58,21 +64,28 @@ export class LoginComponent implements OnInit {
           });
         }
         var varSME = varLoginUser[0].email;
+       
+        
         if (varEmail == 'SME') {
           // this.router.navigateByUrl('SME');
           this.router.navigateByUrl('SME', {
             state: { name: varSME },
           });
-          console.log(varEmail);
+          // console.log(varEmail);
         }
-        if (varEmail == 'Manager') {
-          this.router.navigateByUrl('company');
+        if (varLoginUser[0].role == 'Manager') {
+          this.router.navigateByUrl('company', {
+            state: { name: varCurrentUser },
+          });
+         
         } else {
           this.message = 'Your email or password was not valid';
         }
       });
-    } else {
+    }
+    else {
       this.message = 'Your email or password was not valid';
     }
+  
   }
 }
